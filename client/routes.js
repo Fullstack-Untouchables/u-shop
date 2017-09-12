@@ -20,7 +20,10 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
+
         <Main>
+
+
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route path='/login' component={Login} />
@@ -36,6 +39,8 @@ class Routes extends Component {
             <Route component={Login} />
           </Switch>
         </Main>
+
+
       </Router>
     )
   }
