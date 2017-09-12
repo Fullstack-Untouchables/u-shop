@@ -3,44 +3,58 @@ import {connect} from 'react-redux';
 
 
 
-const items = ["hat","glove", "scarf","boots"]
+// const items = ["hat","glove", "scarf","boots"]
 
-export default class Searchbar extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      inputValue: '',
-      products: []
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+export const Searchbar = (props) => {
+  // constructor (props) {
+  //   super(props)
+  //   this.state = {
+  //     inputValue: '',
+  //     products: []
+  //   }
+  //   this.handleSubmit = this.handleSubmit.bind(this)
+  //   this.handleChange = this.handleChange.bind(this)
+  // }
 
-  handleSubmit(event) {
 
-  }
-
-  handleChange(event) {
-    this.setState({inputValue: event.target.value})
-  }
-
-  render () {
+  // render () {
     // const filteredItem = this.state.items.filter(item => item.name.match(this.state.inputValue))
     const filteredItem = items.filter(item => item.match(this.state.inputValue))
 
     return (
       <div>
-        <form className='form-group' onSubmit={this.handleSubmit}>
+        <form className='form-group' onSubmit={props.handleSubmit}>
           <input
-            bsSize="small"
+            name='search'
             className='form-control'
             placeholder='Look for an item'
-            onChange={this.handleChange}
-            // value={this.inputValue}
+            onChange={props.handleChange}
+            value={props.inputValue}
           />
         </form>
       </div>
     )
   }
+// }
+
+
+mapState = (state) => {
+  return {
+    inputValue: state.inputValue
+  }
 }
 
+mapDispatch = (dispatch, ownProps) => {
+  return {
+    handleChange (event) {
+      dispatch(writeInputValue(event.target.value))
+    },
+    handleSubmit (input, event) {
+      event.preventDefault();
+      dispatch(submitSearch({input}, ownProps.history));
+      dispatch(submitSearch(''))
+    }
+  }
+}
 
+export default connect(mapState, mapDispatch)(Searchbar)

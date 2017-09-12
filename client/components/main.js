@@ -26,7 +26,7 @@ const Main = (props) => {
               <Link to='/home'>Home</Link>
               <a href='#' onClick={handleClick}>Logout</a>
             </div>
-            : <div className='pull-right'>
+            : <div>
               {/* The navbar will show these links before you log in */}
               <Link to='/login'>Login</Link>
               <Link to='/signup'>Sign Up</Link>
