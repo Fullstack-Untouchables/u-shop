@@ -11,10 +11,8 @@ export const Navbar = (props) => {
       <div>
         <button type="button" className="btn btn-primary">Home</button>
         <button type="button" className="btn btn-info">Categories</button>
-
         <Searchbar />
         <button type="button" className="btn btn-success">Cart</button>
-
       </div>
     )
 }

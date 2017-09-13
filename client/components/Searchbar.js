@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import axios from 'axios';
+import { submitSearch, writeInputValue } from '../store';
 
 
 // const items = ["hat","glove", "scarf","boots"]
 
-export const Searchbar = (props) => {
+export default function Searchbar(props) {
   // constructor (props) {
   //   super(props)
   //   this.state = {
@@ -19,7 +20,7 @@ export const Searchbar = (props) => {
 
   // render () {
     // const filteredItem = this.state.items.filter(item => item.name.match(this.state.inputValue))
-    const filteredItem = items.filter(item => item.match(this.state.inputValue))
+    // const filteredItem = items.filter(item => item.match(this.state.inputValue))
 
     return (
       <div>
@@ -57,4 +58,5 @@ mapDispatch = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Searchbar)
+// export default connect(mapState, mapDispatch)(Searchbar)
+const Container = connect(mapState, mapDispatch)(Searchbar)

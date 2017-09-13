@@ -12,8 +12,8 @@ const initialState = {
 }
 
 //ACTION CREATORS
-const submitSearch = (search) => ({type: SEARCH_SUBMIT})
-const writeInputValue = (inputValue) => ({type: WRITE_SEARCH, inputValue})
+export const submitSearch = (search) => ({type: SEARCH_SUBMIT})
+export const writeInputValue = (inputValue) => ({type: WRITE_SEARCH, inputValue})
 
 //THUNK CREATORS
 
