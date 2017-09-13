@@ -11,7 +11,6 @@ export const GET_PRODUCTS ="GET_PRODUCTS";
 
 
 export function getProducts(products){
-    console.log('%#%#%#', products)
     return {
         type: GET_PRODUCTS,
         receivedProducts: products
@@ -35,11 +34,11 @@ export function fetchProducts(){
 export default function(state=initialState, action){
     switch (action.type){
     case GET_PRODUCTS:
-        console.log("INSIDE REDUCER!!!!!!")
+       
         // return Object.assign({},state,{products: action.receivedProducts})
         return action.receivedProducts
     default:
-    console.log("RETURNING DEFAULT STATE")
+    
         return state
     }
 }
