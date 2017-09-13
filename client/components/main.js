@@ -18,7 +18,9 @@ const Main = (props) => {
     <div>
 
       <nav>
-      <Navbar />
+      <button type="button" className="btn btn-primary">Home</button>
+      <button type="button" className="btn btn-info">Categories</button>
+      <button type="button" className="btn btn-success">Cart</button>
         {
           isLoggedIn
             ? <div>
