@@ -4,8 +4,9 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
+import {Main, Login, Signup, UserHome, ProductList, Categories} from './components'
 import {me} from './store'
+import store, {getCategoriesThunk} from './store';
 
 /**
  * COMPONENT
@@ -21,9 +22,12 @@ class Routes extends Component {
     return (
       <Router history={history}>
         <Main>
-        
+
           <Switch>
-            {/* Routes placed here are available to all visitors */}   
+
+            {/* Routes placed here are available to all visitors */}
+            <Route path='/products/search/:inputValue' component={ProductList} />
+            <Route path='/categories' component={Categories} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             {
@@ -35,6 +39,8 @@ class Routes extends Component {
             }
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
+
+
           </Switch>
         </Main>
       </Router>
@@ -57,6 +63,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(getCategoriesThunk())
     }
   }
 }

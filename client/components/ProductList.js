@@ -9,7 +9,7 @@ export const ProductList = (props) => {
 
     return (
       <div>
-       <div></div>
+       <div><h1>{props.match.params.inputValue}</h1></div>
        <div></div>
        <div></div>
 
