@@ -27,10 +27,10 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}   
              <Route  exact path='/products' component={ProductList} />
              <Route exact path='/products/:productId' component={SingleProduct} />
-             <Route path='/products/search/:inputValue' component={ProductList} />
-             <Route path='/categories' component={Categories} />
-             <Route path='/login' component={Login} />
-             <Route path='/signup' component={Signup} />
+             <Route exact path='/products/search/:inputValue' component={ProductList} />
+             <Route exact path='/categories' component={Categories} />
+             <Route exact path='/login' component={Login} />
+             <Route exact path='/signup' component={Signup} />
             
            
             {
