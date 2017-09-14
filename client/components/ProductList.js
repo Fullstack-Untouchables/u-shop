@@ -17,9 +17,9 @@ import store from '../store'
     const getProductsThunk = this.props.fetchProductsfromDb;
     
     getProductsThunk();
-
   }
 
+   
   render(){
     const products = this.props.products
     return(<div>
@@ -48,6 +48,7 @@ const mapStateToProps = (state,ownProps) => {
     products: state.products
   }
 }
+
 const mapDispatchToProps = function(dispatch) {
   return {
         fetchProductsfromDb: () => {
@@ -57,3 +58,4 @@ const mapDispatchToProps = function(dispatch) {
   }
   
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+
