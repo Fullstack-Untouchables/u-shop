@@ -1,29 +1,61 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProducts, getProducts } from '../store/products.js';
+import store from '../store'
 
 
 
+ class ProductList extends Component {
+ 
+  constructor(props){
+    super(props)
 
+  }
 
-export const ProductList = (props) => {
+  componentDidMount() {
+    const getProductsThunk = this.props.fetchProductsfromDb;
+    
+    getProductsThunk();
+  }
 
-    return (
-      <div>
-       <div><h1>{props.match.params.inputValue}</h1></div>
-       <div></div>
-       <div></div>
+   
+  render(){
+    const products = this.props.products
+    return(<div>
+        <h3>Products</h3>
+        <hr />
+        { 
+          products.length && products.map(product=>{
+            return(
+              <div key={product.id}>
+              <Link to={`products/${product.id}`}>
+              <p>{product.name} | {product.description} | ${product.price}</p>
+              </Link>
+              </div>
+            )
+          })
+        }
+      </div>)
 
-      </div>
-    )
-}
-
-
-
-const mapState = (state) => {
-  return {
-    // isLoggedIn: state.user.loggedin?
   }
 }
 
 
-export default connect(mapState)(ProductList)
+const mapStateToProps = (state,ownProps) => {
+  console.log("OWN PROPS",ownProps)
+  return {
+    products: state.products
+  }
+}
+
+const mapDispatchToProps = function(dispatch) {
+  return {
+        fetchProductsfromDb: () => {
+        dispatch(fetchProducts())
+        }
+      }
+  }
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+

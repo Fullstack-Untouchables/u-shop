@@ -1,17 +1,10 @@
+import axios from 'axios';
 
 
 
-const products = [
-    {name: "jeans",
-    description: "good jeans",
-    quantity: 7,
-    price: 9.99,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDnXRrvtPMgZ3ZbIrjjXR8HuScBl3_X7h-P2ZTPUwsOdgA6vIT"
-    },
-]
 
 const initialState={
-    products: products
+    products: []
 }
 
 export const GET_PRODUCTS ="GET_PRODUCTS";
@@ -25,18 +18,27 @@ export function getProducts(products){
 }
 
 export function fetchProducts(){
-
     return function thunk(dispatch){
-        return this.products
+        axios.get('/api/products')
+        .then(res=>{
+            return res.data
+        })
+        .then(products=>{
+            const getProductsAction= getProducts(products)
+            dispatch(getProductsAction)
+        })
+        .catch(console.error)
     }
 }
 
-function allProductsReducer(state=initialState, action){
+export default function(state=initialState, action){
     switch (action.type){
     case GET_PRODUCTS:
-        return Object.assign({},state,{products: action.receivedProducts})
-    
+       
+        // return Object.assign({},state,{products: action.receivedProducts})
+        return action.receivedProducts
     default:
+    
         return state
     }
 }
