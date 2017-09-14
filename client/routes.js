@@ -6,13 +6,14 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, ProductList, SingleProduct, Categories } from './components'
 import {me} from './store'
-import store, {getCategoriesThunk} from './store';
+import store, {getCategoriesThunk, fetchProducts} from './store';
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount () {
+    console.log("FETCH PRODUCTS", fetchProducts)
     this.props.loadInitialData()
   }
 
@@ -67,6 +68,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(getCategoriesThunk())
+      dispatch(fetchProducts())
     }
   }
 }

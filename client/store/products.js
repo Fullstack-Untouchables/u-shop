@@ -31,6 +31,13 @@ export function fetchProducts(){
     }
 }
 
+// export function fetchSingleProduct(productId){
+//     return function thunk(dispatch){
+//         axios.get(`/api/products/${productId}`)
+//         .then
+//     }
+// }
+
 export default function(state=initialState, action){
     switch (action.type){
     case GET_PRODUCTS:

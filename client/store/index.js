@@ -14,3 +14,4 @@ export default store
 export * from './user'
 export * from './searchbar'
 export * from './categories'
+export * from './products'
