@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Review } = require('../db/models');
+const { Review, User } = require('../db/models');
 module.exports = router
 
 
@@ -10,9 +10,21 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  Review.create(req.body)
+  User.findOne({
+    where: {
+      name: 'Oscar'
+    }
+  })
+  .then(user => {
+  Review.create({
+    userId: user.id,
+    productId: req.body.productId,
+    text: req.body.text,
+    rating: req.body.rating
+  })
   .then(review => res.json(review))
   .catch(next)
+  })
 })
 
 router.get('/:reviewId', (req, res, next) => {

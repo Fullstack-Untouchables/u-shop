@@ -8,7 +8,7 @@ export default class PostReviewForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            
+
             reviewInput: '',
             ratingInput: ''
         }
@@ -22,7 +22,6 @@ export default class PostReviewForm extends Component {
         // this.props.addReview(newReview)
         evt.preventDefault()
         const newReview = {
-            userId: 1,
             productId: this.props.productId,
             text: this.state.reviewInput,
             rating:+this.state.ratingInput
@@ -49,7 +48,7 @@ export default class PostReviewForm extends Component {
         console.log("STATE",this.state)
         return(
                 <form onSubmit={this.handleSubmit}>
-                
+
                 <div className="form-group">
                     <label>Review</label>
                     <input onChange={this.handleChangeReview} name="review"></input>
