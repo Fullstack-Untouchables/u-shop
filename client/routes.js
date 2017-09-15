@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, ProductList, SingleProduct, Categories } from './components'
+import { Main, Login, Signup, UserHome, ProductList, SingleProduct, Categories, LandingPage } from './components'
 import {me} from './store'
 import store, {getCategoriesThunk} from './store';
 
@@ -24,15 +24,15 @@ class Routes extends Component {
         <Main>
 
           <Switch>
-            {/* Routes placed here are available to all visitors */}   
+            {/* Routes placed here are available to all visitors */}
              <Route  exact path='/products' component={ProductList} />
              <Route exact path='/products/:productId' component={SingleProduct} />
              <Route path='/products/search/:inputValue' component={ProductList} />
              <Route path='/categories' component={Categories} />
              <Route path='/login' component={Login} />
              <Route path='/signup' component={Signup} />
-            
-           
+
+
             {
               isLoggedIn &&
                 <Switch>
@@ -40,8 +40,8 @@ class Routes extends Component {
                   <Route path='/home' component={UserHome} />
                 </Switch>
             }
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            {/* Displays our Landing Page component as a fallback */}
+            <Route component={LandingPage} />
 
 
           </Switch>
