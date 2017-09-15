@@ -6,56 +6,36 @@ import store from '../store'
 
 
 
- class ProductList extends Component {
- 
-  constructor(props){
-    super(props)
-
-  }
-
-  componentDidMount() {
-    const getProductsThunk = this.props.fetchProductsfromDb;
-    
-    getProductsThunk();
-  }
-
+ const ProductList = (props) => {
    
-  render(){
-    const products = this.props.products
-    return(<div>
+    console.log("PRODUCT LIST PROPS", props);
+    const products = props.products;
+
+    return (<div>
         <h3>Products</h3>
-        <hr />
-        { 
-          products.length && products.map(product=>{
-            return(
-              <div key={product.id}>
-              <Link to={`products/${product.id}`}>
-              <p>{product.name} | {product.description} | ${product.price}</p>
-              </Link>
-              </div>
-            )
-          })
-        }
-      </div>)
-
+          <hr />
+          { 
+            products.length && products.map(product=>{
+              return(
+                <div key={product.id}>
+                <Link to={`products/${product.id}`}>
+                <p>{product.name} | {product.description} | ${product.price}</p>
+                </Link>
+                </div>
+              )
+            })
+          }
+        </div>)
+   
   }
-}
 
-
+// All Product data is fetched in route.js and passed into state
 const mapStateToProps = (state,ownProps) => {
   console.log("OWN PROPS",ownProps)
   return {
     products: state.products
   }
 }
-
-const mapDispatchToProps = function(dispatch) {
-  return {
-        fetchProductsfromDb: () => {
-        dispatch(fetchProducts())
-        }
-      }
-  }
   
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+export default connect(mapStateToProps)(ProductList)
 
