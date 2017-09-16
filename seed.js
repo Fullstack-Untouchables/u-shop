@@ -3,8 +3,8 @@ const { Product, Category, User } = require('./server/db/models/index')
 
 const Sequelize = require('sequelize');
 const db = new Sequelize(
-  //process.env.DATABASE_URL ||
-  `postgres://oscar:tra1n1ng@localhost:5432/${pkg.name}`)
+  process.env.DATABASE_URL ||
+  `postgres://localhost:5432/${pkg.name}`)
 
 const users = [
   { name: 'Oscar', email: 'oscar@gmail.com', isAdmin: true },
@@ -44,9 +44,8 @@ const seed = () =>
     );
 
 const main = () => {
-  console.log('db url is: ', process.env.DATABASE_URL)
   console.log('Syncing db...', db.config.database)
-  db.sync()
+  db.sync({force: true})
     .then(() => {
       console.log('Seeding database...')
       return seed()
@@ -59,11 +58,10 @@ const main = () => {
     .then(() => {
       db.close()
       console.log('Seeding completed...')
-      return exitCode
+      process.exit()
     })
 }
 
 main()
-process.exit()
 
 
