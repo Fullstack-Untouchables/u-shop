@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import store, {getCategoriesThunk} from '../store';
+import {Link} from 'react-router-dom';
 
 
 
@@ -16,7 +17,9 @@ class Categories extends Component {
       <div>
       {
         this.props.categories && this.props.categories.map(category => (
-          <li key={category.id}>{category.name}</li>
+          <div key={category.id}>
+            <p><Link to={`categories/${category.id}`}>{category.name}</Link></p>
+          </div>
         ))
       }
       </div>
