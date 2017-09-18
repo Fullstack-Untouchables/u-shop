@@ -32,6 +32,7 @@ body {
   }
 
 
+
   nav a {
     float: right;
     display: inline;
@@ -55,5 +56,12 @@ body {
   }
   .nav-categories {
     float: left;
+
+  .imgResponsive{
+    height: 200px;
+    width: 200px;
+    size: fit;
+
   }
 }
+
