@@ -25,6 +25,8 @@ import store from '../store'
                 <img className="imgResponsive" src={product.image}/>
                 {product.name} | {product.description} | ${product.price}</p>
                 </Link>
+                  <p>Category: <Link to={`/categories/${product.category.id}`}>{product.category.name}</Link></p>
+                <hr/>
                 </div>
               )
             })
