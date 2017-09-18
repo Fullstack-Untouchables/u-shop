@@ -20,7 +20,7 @@ import store from '../store'
             products.length && products.map(product => {
               return (
                 <div key={product.id}>
-                <Link to={`products/${product.id}`}>
+                <Link to={`/products/${product.id}`}>
                 <p>
                 <img className="imgResponsive" src={product.image}/>
                 {product.name} | {product.description} | ${product.price}</p>
