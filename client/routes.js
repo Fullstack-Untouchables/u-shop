@@ -4,14 +4,9 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-<<<<<<< Updated upstream
-import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
-=======
 import { Main, Login, Signup, UserHome, ProductList, SingleProduct, Categories, LandingPage, Cart } from './components'
 import {me} from './store'
 import store, {getCategoriesThunk, fetchProducts, fetchItemsFromCart} from './store';
->>>>>>> Stashed changes
 
 /**
  * COMPONENT
@@ -30,11 +25,6 @@ class Routes extends Component {
         <Main>
         
           <Switch>
-<<<<<<< Updated upstream
-            {/* Routes placed here are available to all visitors */}   
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
-=======
             {/* Routes placed here are available to all visitors */}
              <Route  exact path='/products' component={ProductList} />
              <Route exact path='/products/:productId' component={SingleProduct} />
@@ -43,7 +33,6 @@ class Routes extends Component {
              <Route exact path='/login' component={Login} />
              <Route exact path='/signup' component={Signup} />
              <Route exact path='/cart' component={Cart} />
->>>>>>> Stashed changes
             {
               isLoggedIn &&
                 <Switch>

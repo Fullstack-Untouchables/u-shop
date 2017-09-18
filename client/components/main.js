@@ -16,8 +16,6 @@ const Main = (props) => {
 
   return (
     <div>
-<<<<<<< Updated upstream
-=======
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className='navbar-nav mr-auto'>
@@ -54,7 +52,6 @@ const Main = (props) => {
               <Searchbar />
             </li>
           </ul>
->>>>>>> Stashed changes
 
       <nav>
       <button type="button" className="btn btn-primary">Home</button>
