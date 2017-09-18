@@ -55,8 +55,8 @@ export function fetchProducts() {
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_PRODUCTS:
-            // return Object.assign({},state,{products: action.receivedProducts})
-            return action.receivedProducts
+            return Object.assign({},state,{products: action.receivedProducts})
+            //return { products: action.receivedProducts, slectedProduct: {}}
 
         case POST_REVIEW:
             const productReviewed = state.products.filter(product => {
