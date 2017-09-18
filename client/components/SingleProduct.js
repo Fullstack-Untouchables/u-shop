@@ -25,7 +25,7 @@ import PostReviewForm from './post-review-form';
     }
 
     refreshReviews(review){
-        
+
         // const updatedProduct = Object.assign({},this.state, {
         //     this.state.product.reviews: [...this.state.product.reviews, review]
         // })
@@ -33,7 +33,7 @@ import PostReviewForm from './post-review-form';
         // this.setState({
         //     product: this.state.product.reviews.push(review)
         // })
-            
+
         // this.setState({
         //     product: updatedProduct,
         // })
@@ -42,7 +42,7 @@ import PostReviewForm from './post-review-form';
         .then(res=>res.data)
         .then(product=>this.setState({product}))
     }
-    
+
     render(){
 
         const product = this.state.product
@@ -56,10 +56,10 @@ import PostReviewForm from './post-review-form';
                 <hr />
                 <h4>{product.name} | {product.description} | {product.price}</h4>
                 <img className= "imgResponsive" src={product.image} />
-                <PostReviewForm  
+                <PostReviewForm
                     refreshReviews={this.refreshReviews}
                     productId={this.state.product.id}/>
-                
+
                 {
                     reviews && reviews.map(review=>{
                         return(
@@ -68,7 +68,7 @@ import PostReviewForm from './post-review-form';
                             <h4>{review.rating} stars</h4>
                             <p>{review.text}</p>
                             </div>
-                            
+
                         )
                     })
                 }
@@ -91,6 +91,6 @@ import PostReviewForm from './post-review-form';
 //         }
 //     }
 // }
-    
+
 //   export default connect(mapStateToProps,mapDispatchToProps)(SingleProduct)
 
