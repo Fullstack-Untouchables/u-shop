@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { writeInputValue } from '../store';
-import ProductList from './ProductList';
+import ProductList from './products-list';
 
 
 class SearchProducts extends Component {
