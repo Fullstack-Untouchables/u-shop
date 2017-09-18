@@ -10,7 +10,9 @@ export default class PostReviewForm extends Component {
         this.state = {
 
             reviewInput: '',
-            ratingInput: ''
+            ratingInput: '',
+            dirtyReview: false,
+            dirtyRating: false,
         }
         this.handleChangeReview= this.handleChangeReview.bind(this)
         this.handleChangeRating= this.handleChangeRating.bind(this)
@@ -18,8 +20,6 @@ export default class PostReviewForm extends Component {
     }
 
     handleSubmit(evt){
-
-        // this.props.addReview(newReview)
         evt.preventDefault()
         const newReview = {
             productId: this.props.productId,
@@ -33,34 +33,64 @@ export default class PostReviewForm extends Component {
         })
         this.setState({
             reviewInput: '',
-            ratingInput: ''
+            ratingInput: '',
+            dirtyRating: false,
+            dirtyReview: false
         })
         console.log("SUBMITTED")
     }
-
+    //handle changes for forms 
     handleChangeReview(evt){
-        this.setState({reviewInput: evt.target.value})
+        this.setState({
+            reviewInput: evt.target.value,
+            dirtyReview: true
+        })
+        
     }
     handleChangeRating(evt){
-        this.setState({ratingInput: evt.target.value})
+        this.setState({
+            ratingInput: evt.target.value,
+            dirtyRating: true
+        })
+        
     }
     render(){
-        console.log("STATE",this.state)
+        
+        // console.log("POST-REVIEW-FORM STATE",this.state)
+        const dirtyReview = this.state.dirtyReview
+        const dirtyRating=this.state.dirtyRating
+        const invalidNumber =  dirtyRating && isNaN(this.state.ratingInput)
+                                ||dirtyRating && +this.state.ratingInput>5 
+                                || dirtyRating && +this.state.ratingInput<1
+
+        let warning;
+            if(dirtyReview&& !this.state.reviewInput.length){
+                warning="Please Enter a review"
+            } else if( invalidNumber) {warning="Please Enter a rating between 1-5"}
+            
         return(
                 <form onSubmit={this.handleSubmit}>
 
                 <div className="form-group">
                     <label>Review</label>
-                    <input onChange={this.handleChangeReview} name="review"></input>
+
+                    <input value ={this.state.reviewInput} onChange={this.handleChangeReview} name="review"></input>
                 </div>
                 <div className="form-group">
                 <label>Rating</label>
-                <input onChange={this.handleChangeRating} name="rating"></input>
+                <input value ={this.state.ratingInput} onChange={this.handleChangeRating} name="rating"></input>
                 </div>
                 <div>
-                <button className="btn btn-info">Submit Review</button>
+                <button 
+                disabled={this.state.reviewInput.length<1 || isNaN(this.state.ratingInput)|| this.state.input>5||this.state.input<1}
+                className="btn btn-info">
+                         Submit Review</button>
+                
                 </div>
-            </form>)
+                <br/>
+                <div className="alert alert-warning">{warning}</div>
+            </form>)       
+
     }
 }
 

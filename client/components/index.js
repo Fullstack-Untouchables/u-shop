@@ -12,3 +12,5 @@ export ProductList from './ProductList'
 export Categories from './categories'
 export LandingPage from './landingPage'
 export SingleProduct from './SingleProduct'
+export Cart from './cart'
+

@@ -33,6 +33,14 @@ const Main = (props) => {
                 </li>
             }
             <li className='nav-item active'>
+
+            <Link to='/products'>
+              <button type="button" className="btn btn-warning">Products</button>
+            </Link>
+            
+          </li>
+            <li className='nav-item active'>
+
               <Link to='/categories'>
                 <button type="button" className="btn btn-primary">Categories</button>
               </Link>

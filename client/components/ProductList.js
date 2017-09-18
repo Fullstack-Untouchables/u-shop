@@ -6,6 +6,7 @@ import store from '../store'
 
 
 
+
  const ProductList = (props) => {
    
     console.log("PRODUCT LIST PROPS", props);
@@ -14,23 +15,28 @@ import store from '../store'
     return (<div>
         <h3>Products</h3>
           <hr />
-          { 
-            products.length && products.map(product=>{
-              return(
+
+          {
+            products.length && products.map(product => {
+              return (
                 <div key={product.id}>
                 <Link to={`products/${product.id}`}>
-                <p>{product.name} | {product.description} | ${product.price}</p>
+                <p>
+                <img className="imgResponsive" src={product.image}/>
+                {product.name} | {product.description} | ${product.price}</p>
                 </Link>
                 </div>
               )
             })
           }
         </div>)
-   
+
   }
+
 
 // All Product data is fetched in route.js and passed into state
 const mapStateToProps = (state,ownProps) => {
+  
   console.log("OWN PROPS",ownProps)
   return {
     products: state.products
