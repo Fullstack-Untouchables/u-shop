@@ -37,11 +37,8 @@ const mapStateToProps = (state, ownProps) => {
     // isLoggedIn: state.user.loggedin?
   }
 }
-<<<<<<< Updated upstream
-=======
 
 export default connect(mapStateToProps)(ProductList)
->>>>>>> Stashed changes
 
 
-export default connect(mapState)(ProductList)
+// export default connect(mapState)(ProductList)
