@@ -17,16 +17,23 @@ const db = new Sequelize(
   const products = [
 
     {name: 'Shirt', description: 'Polo shirt', quantity: 10, price: 9.95,
-      image: 'http://www.ralphlauren.com/graphics/product_images/pPOLO2-25308214_lifestyle_t240.jpg'},
+      image: 'http://www.ralphlauren.com/graphics/product_images/pPOLO2-25308214_lifestyle_t240.jpg', categoryId: 1},
     {name: 'Pant', description: 'Kaki Pants', quantity: 100, price: 19.95,
-      image:'https://www.rei.com/media/product/885652'  },
+      image:'https://www.rei.com/media/product/885652', categoryId: 1},
     { name: 'Merman Suit', description: 'wow', quantity: 100, price: 19.95,
-      image:'http://3.bp.blogspot.com/-O-KrR31VEqU/VEOYIXEvxaI/AAAAAAABgqM/mwytYGZKBAU/s1600/merman2.jpg' },
+      image:'http://3.bp.blogspot.com/-O-KrR31VEqU/VEOYIXEvxaI/AAAAAAABgqM/mwytYGZKBAU/s1600/merman2.jpg', categoryId: 1 },
     { name: 'Weiner Hat', description: 'wow...so nice', quantity: 100, price: 19.95,
-      image:'http://thatisinsane.net/wp-content/uploads/2015/07/hot-dog-hat.jpg' },
+      image:'http://thatisinsane.net/wp-content/uploads/2015/07/hot-dog-hat.jpg', categoryId: 1 },
     { name: 'Rainbow Hat', description: 'very good... ', quantity: 100, price: 19.95,
-      image:'https://img.costumecraze.com/images/vendors/rasta/3038-a-Rainbow-Hat-large.jpg' },
-    
+      image:'https://img.costumecraze.com/images/vendors/rasta/3038-a-Rainbow-Hat-large.jpg', categoryId: 1 },
+    { name: 'Tobasco Sauce', description: 'very good... ', quantity: 100, price: 19.95,
+      image:'https://static01.nyt.com/images/2014/08/31/magazine/31wmt/mag-31WMT-t_CA0-master1050.jpg', categoryId: 3 },
+    { name: 'Balut', description: 'very good... ', quantity: 100, price: 19.95,
+      image:'https://i.ytimg.com/vi/jY-hPWdzU60/maxresdefault.jpg', categoryId: 3 },
+    { name: 'Casu Marzu', description: 'very good... ', quantity: 100, price: 19.95,
+      image:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Casu_Marzu_cheese.jpg/290px-Casu_Marzu_cheese.jpg', categoryId: 3 },
+    { name: 'Cheese Whiz', description: 'very good... ', quantity: 100, price: 19.95,
+      image:'https://i5.walmartimages.com/asr/b9c049f1-ecda-4ff4-8e96-89ddf2fe0adf_1.398c1a9feeab18da2bed13f4d0898324.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF', categoryId: 3 },
   ]
 
   const categories = [
@@ -34,7 +41,6 @@ const db = new Sequelize(
     {name: 'Entertainment'},
     {name: 'Food & Pantry'},
     {name: 'Appliances'},
-    {name: 'Clothes'}
   ]
 
 
@@ -48,14 +54,7 @@ const seed = () =>
       ))
     .then(() =>
       Promise.all(products.map(product =>
-        Product.create(Object.assign({}, product,
-          {
-            categories: [
-              { name: 'Clothing' }
-            ]
-          }), {
-            include: [Category]
-          }))
+        Product.create(product))
       )
     );
 
