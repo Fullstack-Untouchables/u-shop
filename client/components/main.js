@@ -16,7 +16,11 @@ const Main = (props) => {
 
   return (
     <div>
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+      <nav className="">
+        <Link to='/categories' className='nav-categories'>
+          Categories
+        </Link>
+        <Searchbar/>
             {
               isLoggedIn
                 ?
@@ -26,7 +30,10 @@ const Main = (props) => {
                     My Page
                   </Link>
                   <a href='#' onClick={handleClick}>Logout</a>
-                  </div>
+                  <Link to='/cart' className='cart'>
+                    Cart
+                  </Link>
+                 </div>
                 :
                 <div>
                   {/* The navbar will show these links before you log in */}
@@ -36,21 +43,11 @@ const Main = (props) => {
                   <Link to='/signup'>
                     Sign Up
                   </Link>
+                  <Link to='/cart' className='cart'>
+                    Cart
+                  </Link>
                 </div>
             }
-
-              <Link to='/categories'>
-                <button type="button" className="btn btn-primary">Categories</button>
-              </Link>
-
-
-              <Link to='/cart'>
-                <button type="button" className="btn btn-success">Cart</button>
-              </Link>
-
-
-              <Searchbar />
-
       </nav>
 
       <hr />
