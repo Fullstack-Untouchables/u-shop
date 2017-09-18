@@ -25,6 +25,7 @@ class SingleProduct extends Component {
             .then(product => this.setState({ product }))
     }
 
+
     refreshReviews(review) {
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
@@ -91,7 +92,6 @@ class SingleProduct extends Component {
     }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
     return {
         products: state.products,
@@ -111,4 +111,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+
 

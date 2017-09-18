@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: sans-serif;
 
@@ -9,7 +14,8 @@ body {
     display: block;
   }
   nav{
-    display: inline-block
+    display: inline-block;
+    width: 100%
   }
 
   #logins {
@@ -24,10 +30,38 @@ body {
     margin: 1em;
     display: inline-block;
   }
+
+
+
+  nav a {
+    float: right;
+    display: inline;
+
+  }
+  .Searchbar {
+
+    float: left;
+    .search-input {
+      float: left;
+      margin: 16px;
+      padding: 8px;
+      width: 360px;
+    }
+    .search-btn {
+      float: left;
+      border: 1px solid blue;
+      border-radius: 10%;
+      padding: 6px;
+    }
+  }
+  .nav-categories {
+    float: left;
+
   .imgResponsive{
     height: 200px;
     width: 200px;
     size: fit;
+
   }
 }
 

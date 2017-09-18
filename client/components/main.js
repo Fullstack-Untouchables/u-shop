@@ -16,48 +16,38 @@ const Main = (props) => {
 
   return (
     <div>
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className='navbar-nav mr-auto'>
+      <nav className="">
+        <Link to='/categories' className='nav-categories'>
+          Categories
+        </Link>
+        <Searchbar/>
             {
               isLoggedIn
-                ? <li className='nav-item active'>
+                ?
+                <div>
                   {/* The navbar will show these links after you log in */}
-                  <Link to='/home'>My Page</Link>
+                  <Link to='/home'>
+                    My Page
+                  </Link>
                   <a href='#' onClick={handleClick}>Logout</a>
-                </li>
-                : <li className='nav-item active'>
+                  <Link to='/cart' className='cart'>
+                    Cart
+                  </Link>
+                 </div>
+                :
+                <div>
                   {/* The navbar will show these links before you log in */}
-                  <Link to='/login'>Login</Link>
-                  <Link to='/signup'>Sign Up</Link>
-                </li>
+                  <Link to='/login'>
+                    Login
+                  </Link>
+                  <Link to='/signup'>
+                    Sign Up
+                  </Link>
+                  <Link to='/cart' className='cart'>
+                    Cart
+                  </Link>
+                </div>
             }
-            <li className='nav-item active'>
-
-            <Link to='/products'>
-              <button type="button" className="btn btn-warning">Products</button>
-            </Link>
-            
-          </li>
-            <li className='nav-item active'>
-
-              <Link to='/categories'>
-                <button type="button" className="btn btn-primary">Categories</button>
-              </Link>
-            </li>
-            <li className='nav-item active'>
-              <Link to='/cart'>
-                <button type="button" className="btn btn-success">Cart</button>
-              </Link>
-            </li>
-            <li className='nav-item active'>
-              <Searchbar />
-            </li>
-          </ul>
-
-
-
-        </div>
       </nav>
 
       <hr />
