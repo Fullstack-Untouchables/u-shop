@@ -5,9 +5,12 @@ import user from './user'
 import products from './products'
 import searchbar from './searchbar'
 import categories from './categories'
+
 import cart from './cart'
 
 const reducer = combineReducers({user, products, searchbar, categories, cart})
+
+
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
 
@@ -17,3 +20,4 @@ export * from './searchbar'
 export * from './categories'
 export * from './products'
 export * from './cart'
+

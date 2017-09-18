@@ -1,11 +1,9 @@
 const User = require('./user')
-<<<<<<< Updated upstream
-=======
 const Product = require('./product')
 const Review = require('./review')
 const Category = require('./category')
 const Cart = require('./cart')
->>>>>>> Stashed changes
+
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -13,6 +11,14 @@ const Cart = require('./cart')
  *
  *    BlogPost.belongsTo(User)
  */
+Product.hasMany(Review)
+Review.belongsTo(Product)
+
+Product.belongsToMany(Category, {through: 'CategoryProduct'})
+Category.belongsToMany(Product, {through: 'CategoryProduct'})
+
+User.hasMany(Review)
+Review.belongsTo(User)
 
 Cart.belongsTo(User)
 User.hasOne(Cart)
@@ -27,13 +33,10 @@ User.hasOne(Cart)
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-<<<<<<< Updated upstream
-  User
-=======
+
   User,
   Product,
   Category,
   Review,
   Cart
->>>>>>> Stashed changes
 }

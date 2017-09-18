@@ -1,19 +1,14 @@
+import axios from 'axios';
 
 //add a thunk for write new review?
 
 
-const products = [
-    {name: "jeans",
-    description: "good jeans",
-    quantity: 7,
-    price: 9.99,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDnXRrvtPMgZ3ZbIrjjXR8HuScBl3_X7h-P2ZTPUwsOdgA6vIT"
-    },
-]
 
 const initialState={
+
     products: [],
     slectedProduct:{}
+
 }
 
 //ACTIONS 
@@ -48,18 +43,19 @@ export function postReview(review, product){
 }
 
 export function fetchProducts(){
-
     return function thunk(dispatch){
-        return this.products
+        axios.get('/api/products')
+        .then(res=>{
+            return res.data
+        })
+        .then(products=>{
+            const getProductsAction= getProducts(products)
+            dispatch(getProductsAction)
+        })
+        .catch(console.error)
     }
 }
 
-// export function fetchSingleProduct(productId){
-//     return function thunk(dispatch){
-//         axios.get(`/api/products/${productId}`)
-//         .then
-//     }
-// }
 
 
 
@@ -69,14 +65,12 @@ export default function(state=initialState, action){
        
         // return Object.assign({},state,{products: action.receivedProducts})
         return action.receivedProducts
+
     case POST_REVIEW:
         const productReviewed = state.products.filter(product=>{
          if(product.id === action.review.productId) return product })[0]
         productReviewed.reviews.push(action.review)    
         return Object.assign({}, state, {})     
-
-        
-    
     default:
         return state
     }

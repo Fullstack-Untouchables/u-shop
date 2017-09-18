@@ -8,6 +8,7 @@ export default class PostReviewForm extends Component {
     constructor(props){
         super(props)
         this.state = {
+
             reviewInput: '',
             ratingInput: '',
             dirtyReview: false,
@@ -19,7 +20,6 @@ export default class PostReviewForm extends Component {
     }
 
     handleSubmit(evt){
-
         evt.preventDefault()
         const newReview = {
             productId: this.props.productId,
@@ -68,12 +68,12 @@ export default class PostReviewForm extends Component {
                 warning="Please Enter a review"
             } else if( invalidNumber) {warning="Please Enter a rating between 1-5"}
             
-
         return(
                 <form onSubmit={this.handleSubmit}>
 
                 <div className="form-group">
                     <label>Review</label>
+
                     <input value ={this.state.reviewInput} onChange={this.handleChangeReview} name="review"></input>
                 </div>
                 <div className="form-group">
@@ -89,8 +89,8 @@ export default class PostReviewForm extends Component {
                 </div>
                 <br/>
                 <div className="alert alert-warning">{warning}</div>
-            </form>)
-            
+            </form>)       
+
     }
 }
 

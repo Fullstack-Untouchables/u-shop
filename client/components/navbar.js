@@ -1,16 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import Searchbar from './'
+
+import {Link, withRouter} from 'react-router-dom';
+import {Searchbar} from './';
+import {Categories} from './';
 
 
 
-
-export const Navbar = (props) => {
+export default (props) => {
 
     return (
       <div>
         <button type="button" className="btn btn-primary">Home</button>
-        <button type="button" className="btn btn-info">Categories</button>
+        <Link to='/categories'>
+
+        <button type="button" className="btn btn-primary">Categories</button>
+        </Link>
+
         <Searchbar />
         <button type="button" className="btn btn-success">Cart</button>
       </div>
@@ -19,11 +24,4 @@ export const Navbar = (props) => {
 
 
 
-const mapState = (state) => {
-  return {
-    // isLoggedIn: state.user.loggedin?
-  }
-}
 
-
-export default connect(mapState)(Navbar)

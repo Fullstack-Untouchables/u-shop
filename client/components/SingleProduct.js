@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 
 
 
- class SingleProduct extends Component{
+class SingleProduct extends Component{
 
     constructor(props){
         super(props)
@@ -19,6 +19,7 @@ import {Link} from 'react-router-dom';
         }
         this.refreshReviews=this.refreshReviews.bind(this)
         this.handleClick=this.handleClick.bind(this)
+
     }
 
     componentDidMount(){
@@ -29,12 +30,12 @@ import {Link} from 'react-router-dom';
     }
 
     refreshReviews(review){
-        
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
         .then(res=>res.data)
         .then(product=>this.setState({product}))
     }
+
 
     handleClick(evt){
         const product = this.state.product
@@ -66,11 +67,13 @@ import {Link} from 'react-router-dom';
                 <h4>{product.name} | {product.description} | {product.price}</h4>
                 <img className= "imgResponsive" src={product.image} />
 
+
                 <button className="btn btn-success btn-lg" onClick={this.handleClick}>
                 <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
               </button>
 
                 <h3>Reviews</h3>
+
                 <PostReviewForm  
                     refreshReviews={this.refreshReviews}
                     productId={this.state.product.id}/>
@@ -92,6 +95,7 @@ import {Link} from 'react-router-dom';
         )
     }
 }
+
 
 const mapStateToProps = (state,ownProps) => {
     return {

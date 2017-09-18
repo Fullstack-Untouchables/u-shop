@@ -11,10 +11,10 @@ const db = new Sequelize(
     {name: 'Bojan', email: 'bojan@gmail.com', isAdmin: true},
     {name: 'Jason', email: 'jasonrosso@gmail.com', isAdmin: true},
     {name: 'Peter', email: 'peter@gmail.com', isAdmin: true},
-
   ]
 
   const products = [
+
     {name: 'Shirt', description: 'Polo shirt', quantity: 10, price: 9.95,
       image: 'http://www.ralphlauren.com/graphics/product_images/pPOLO2-25308214_lifestyle_t240.jpg'},
     {name: 'Pant', description: 'Kaki Pants', quantity: 100, price: 19.95,
@@ -34,7 +34,6 @@ const db = new Sequelize(
     {name: 'Food & Pantry'},
     {name: 'Appliances'},
     {name: 'Clothes'}
-
   ]
 
   const seed = () =>

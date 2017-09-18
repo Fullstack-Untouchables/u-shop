@@ -5,14 +5,17 @@ import { fetchProducts, getProducts } from '../store/products.js';
 import store from '../store'
 
 
- const ProductList = (props) => {
 
-    console.log('PRODUCT LIST PROPS', props);
+
+ const ProductList = (props) => {
+   
+    console.log("PRODUCT LIST PROPS", props);
     const products = props.products;
 
     return (<div>
         <h3>Products</h3>
           <hr />
+
           {
             products.length && products.map(product => {
               return (
@@ -30,15 +33,15 @@ import store from '../store'
 
   }
 
+
 // All Product data is fetched in route.js and passed into state
-const mapStateToProps = (state, ownProps) => {
-  console.log('OWN PROPS', ownProps)
+const mapStateToProps = (state,ownProps) => {
+  
+  console.log("OWN PROPS",ownProps)
   return {
-    // isLoggedIn: state.user.loggedin?
+    products: state.products
   }
 }
-
+  
 export default connect(mapStateToProps)(ProductList)
 
-
-// export default connect(mapState)(ProductList)

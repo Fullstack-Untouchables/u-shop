@@ -1,62 +1,44 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios';
-import { submitSearch, writeInputValue } from '../store';
+import { Link, withRouter } from 'react-router-dom';
+
+import { writeInputValue } from '../store';
+
+const Searchbar = (props) => {
+
+  console.log(props.inputValue)
+  return (
+    <form className='form-inline'>
+      <input
+        name='search'
+        className='form-control'
+        placeholder='Look for an item'
+        onChange={props.handleChange}
+        value={props.inputValue}
+      />
+      <Link to={`/products/search/${props.inputValue}`} className='btn btn-link'>
+        <button className="btn btn-outline-success" type="submit">
+        Search
+        </button>
+      </Link>
+    </form>
+  )
+}
 
 
-// const items = ["hat","glove", "scarf","boots"]
-
-export default function Searchbar(props) {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {
-  //     inputValue: '',
-  //     products: []
-  //   }
-  //   this.handleSubmit = this.handleSubmit.bind(this)
-  //   this.handleChange = this.handleChange.bind(this)
-  // }
-
-
-  // render () {
-    // const filteredItem = this.state.items.filter(item => item.name.match(this.state.inputValue))
-    // const filteredItem = items.filter(item => item.match(this.state.inputValue))
-
-    return (
-      <div>
-        <form className='form-group' onSubmit={props.handleSubmit}>
-          <input
-            name='search'
-            className='form-control'
-            placeholder='Look for an item'
-            onChange={props.handleChange}
-            value={props.inputValue}
-          />
-        </form>
-      </div>
-    )
-  }
-// }
-
-
-mapState = (state) => {
+const mapState = (state) => {
   return {
-    inputValue: state.inputValue
+    inputValue: state.searchbar
   }
 }
 
-mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = (dispatch) => {
   return {
     handleChange (event) {
       dispatch(writeInputValue(event.target.value))
-    },
-    handleSubmit (input, event) {
-      event.preventDefault();
-      dispatch(submitSearch({input}, ownProps.history));
-      dispatch(submitSearch(''))
     }
   }
 }
 
 // export default connect(mapState, mapDispatch)(Searchbar)
-const Container = connect(mapState, mapDispatch)(Searchbar)
+export default withRouter(connect(mapState, mapDispatch)(Searchbar))

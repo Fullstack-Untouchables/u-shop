@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User} = require('../db/models');
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -11,4 +11,43 @@ router.get('/', (req, res, next) => {
   })
     .then(users => res.json(users))
     .catch(next)
+})
+
+router.post('/', (req, res, next) => {
+  User.create(req.body)
+  .then(user => res.json(user))
+  .catch(next)
+})
+
+router.get('/:userId', (req, res, next) => {
+  const userId = req.params.userId
+
+  User.findById(userId)
+  .then(user => res.json(user))
+  .catch(next)
+})
+
+router.put('/:userId', (req, res, next) => {
+  const userId = req.params.userId
+
+  User.findById(userId)
+  .then(user => user.update(req.body, {returning:true}))
+  .then(updated => {
+    // console.log(updated.dataValues)
+    // res.status(204).json(updated.user)}
+    res.status(200).json(updated)
+  })
+  .catch(next)
+})
+
+router.delete('/:userId', (req, res, next) => {
+  const userId = req.params.userId
+
+  User.destroy({
+    where: {
+      id: userId
+    }
+  })
+  .then(() => res.status(204).end())
+  .catch(next)
 })
