@@ -12,12 +12,8 @@ const products = [
 ]
 
 const initialState={
-<<<<<<< Updated upstream
-    products: products
-=======
     products: [],
     slectedProduct:{}
->>>>>>> Stashed changes
 }
 
 //ACTIONS 
@@ -58,12 +54,6 @@ export function fetchProducts(){
     }
 }
 
-<<<<<<< Updated upstream
-function allProductsReducer(state=initialState, action){
-    switch (action.type){
-    case GET_PRODUCTS:
-        return Object.assign({},state,{products: action.receivedProducts})
-=======
 // export function fetchSingleProduct(productId){
 //     return function thunk(dispatch){
 //         axios.get(`/api/products/${productId}`)
@@ -84,9 +74,8 @@ export default function(state=initialState, action){
          if(product.id === action.review.productId) return product })[0]
         productReviewed.reviews.push(action.review)    
         return Object.assign({}, state, {})     
-    default:
+
         
->>>>>>> Stashed changes
     
     default:
         return state

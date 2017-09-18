@@ -1,27 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-<<<<<<< Updated upstream
-
-
-
-
-
-export const ProductList = (props) => {
-
-    return (
-      <div>
-       <div></div>
-       <div></div>
-       <div></div>
-
-      </div>
-    )
-}
-
-
-
-const mapState = (state) => {
-=======
 import { Link } from 'react-router-dom';
 import { fetchProducts, getProducts } from '../store/products.js';
 import store from '../store'
@@ -55,7 +33,6 @@ import store from '../store'
 // All Product data is fetched in route.js and passed into state
 const mapStateToProps = (state, ownProps) => {
   console.log('OWN PROPS', ownProps)
->>>>>>> Stashed changes
   return {
     // isLoggedIn: state.user.loggedin?
   }
