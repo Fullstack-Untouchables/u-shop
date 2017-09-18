@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 
 import { Main, Login, Signup, UserHome, ProductList, SingleProduct,
-         Categories, LandingPage, Cart, SingleCategory } from './components'
+         Categories, LandingPage, Cart, SingleCategory, SearchProducts } from './components'
 import {me} from './store'
 import store, {getCategoriesThunk, fetchProducts, fetchItemsFromCart} from './store';
 
@@ -32,7 +32,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
              <Route  exact path='/products' component={ProductList} />
              <Route exact path='/products/:productId' component={SingleProduct} />
-             <Route exact path='/products/search/:inputValue' component={ProductList} />
+             <Route exact path='/products/search/:inputValue' component={SearchProducts} />
              <Route exact path='/categories/:categoryId' component={SingleCategory} />
              <Route exact path='/categories' component={Categories} />
              <Route exact path='/login' component={Login} />

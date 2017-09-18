@@ -39,7 +39,7 @@ const mapStateToProps = (state,ownProps) => {
   
   console.log("OWN PROPS",ownProps)
   return {
-    products: state.products
+    products: ownProps.products || state.products
   }
 }
   
