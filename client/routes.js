@@ -40,15 +40,10 @@ class Routes extends Component {
                   <Route path='/home' component={UserHome} />
                 </Switch>
             }
-<<<<<<< Updated upstream
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
-=======
             {/* Displays our Landing Page component as a fallback */}
             <Route component={ProductList} />
 
 
->>>>>>> Stashed changes
           </Switch>
         </Main>
       </Router>
@@ -73,12 +68,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-<<<<<<< Updated upstream
-=======
       dispatch(getCategoriesThunk())
       dispatch(fetchProducts())
       // dispatch(fetchItemsFromCart())
->>>>>>> Stashed changes
     }
   }
 }
