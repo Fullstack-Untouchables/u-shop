@@ -28,7 +28,7 @@ class SearchProducts extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        products: state.products
+        products: state.products.products
     }
 }
 

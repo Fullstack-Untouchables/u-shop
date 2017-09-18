@@ -16,7 +16,7 @@ class SingleCategory extends Component {
         console.log("SINGLE CATEGORY PROPS", this.props)
         const categoryId = +this.props.match.params.categoryId
         const categories=this.props.categories
-        const products = this.props.products
+        const products = this.props.products.products
         console.log(products.length&& categories.length)
 
         if(products.length&& categories.length){
