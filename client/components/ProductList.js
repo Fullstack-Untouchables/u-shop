@@ -20,11 +20,13 @@ import store from '../store'
             products.length && products.map(product => {
               return (
                 <div key={product.id}>
-                <Link to={`products/${product.id}`}>
+                <Link to={`/products/${product.id}`}>
                 <p>
                 <img className="imgResponsive" src={product.image}/>
                 {product.name} | {product.description} | ${product.price}</p>
                 </Link>
+                  <p>Category: <Link to={`/categories/${product.category.id}`}>{product.category.name}</Link></p>
+                <hr/>
                 </div>
               )
             })
@@ -39,7 +41,7 @@ const mapStateToProps = (state,ownProps) => {
   
   console.log("OWN PROPS",ownProps)
   return {
-    products: state.products
+    products: ownProps.products || state.products
   }
 }
   
