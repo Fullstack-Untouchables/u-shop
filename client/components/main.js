@@ -17,19 +17,26 @@ const Main = (props) => {
   return (
     <div>
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-
             {
               isLoggedIn
                 ?
+                <div>
                   {/* The navbar will show these links after you log in */}
-                  <Link to='/home'>My Page</Link>
+                  <Link to='/home'>
+                    My Page
+                  </Link>
                   <a href='#' onClick={handleClick}>Logout</a>
-
+                  </div>
                 :
+                <div>
                   {/* The navbar will show these links before you log in */}
-                  <Link to='/login'>Login</Link>
-                  <Link to='/signup'>Sign Up</Link>
-
+                  <Link to='/login'>
+                    Login
+                  </Link>
+                  <Link to='/signup'>
+                    Sign Up
+                  </Link>
+                </div>
             }
 
               <Link to='/categories'>
