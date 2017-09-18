@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models');
+const {User, Order} = require('../db/models');
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -51,3 +51,14 @@ router.delete('/:userId', (req, res, next) => {
   .then(() => res.status(204).end())
   .catch(next)
 })
+
+router.get('/:userId/orders', (req, res, next) => {
+  let userId = req.params.userId
+
+  Order.findAll({
+    where: {
+      purchaser: userId
+    }
+  })
+})
+
