@@ -75,7 +75,7 @@ const startListening = () => {
   const io = socketio(server)
   require('./socket')(io)
 }
-
+console.log("*** app ***", app.req)
 //const syncDb = () => db.sync({force: true})
 const syncDb = () => db.sync()
 
