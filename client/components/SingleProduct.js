@@ -1,56 +1,51 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products.js';
-import {addItemToCart, placeItemInCart} from '../store';
-import store from '../store';
+import { placeItemInCart } from '../store';
 import axios from 'axios'
 import PostReviewForm from './post-review-form';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+class SingleProduct extends Component {
 
-
-
-class SingleProduct extends Component{
-
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             product: {}
         }
-        this.refreshReviews=this.refreshReviews.bind(this)
-        this.handleClick=this.handleClick.bind(this)
+        this.refreshReviews = this.refreshReviews.bind(this)
+        this.handleClick = this.handleClick.bind(this)
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
-        .then(res=>res.data)
-        .then(product=>this.setState({product}))
+            .then(res => res.data)
+            .then(product => this.setState({ product }))
     }
 
-    refreshReviews(review){
+    refreshReviews(review) {
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
-        .then(res=>res.data)
-        .then(product=>this.setState({product}))
+            .then(res => res.data)
+            .then(product => this.setState({ product }))
     }
 
-
-    handleClick(evt){
+    handleClick(evt) {
         const product = this.state.product
         console.log("clicked")
-        const productToAdd ={
-            id:product.id, 
+        const productToAdd = {
+            id: product.id,
             name: product.name,
-            price: product.price
+            price: product.price,
+            image: product.image
         }
         console.log(productToAdd)
-        const action =placeItemInCart(product)
-        store.dispatch(action)
+        this.props.placeItemInCart(productToAdd)
     }
-    
-    render(){
+
+    render() {
         // console.log("SINGLE PRODUCT STATE", this.state)
         console.log("SINGLE PRODUCT PROPS", this.props.itemsInCart)
         const product = this.state.product
@@ -58,65 +53,62 @@ class SingleProduct extends Component{
         // console.log("add item to cart",addItemToCart)
         // console.log("PRODUCT",product)
         // console.log(reviews)
-        
-        return(
+
+        return (
             product ?
-            <div>
-                <h3>Product Detail</h3>
-                <hr />
-                <h4>{product.name} | {product.description} | {product.price}</h4>
-                <img className= "imgResponsive" src={product.image} />
+                <div>
+                    <h3>Product Detail</h3>
+                    <hr />
+                    <h4>{product.name} | {product.description} | {product.price}</h4>
+                    <img className="imgResponsive" src={product.image} />
 
 
-                <button className="btn btn-success btn-lg" onClick={this.handleClick}>
-                <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+                    <button className="btn btn-success btn-lg" onClick={this.handleClick}>
+                        <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
               </button>
 
-                <h3>Reviews</h3>
+                    <h3>Reviews</h3>
 
-                <PostReviewForm  
-                    refreshReviews={this.refreshReviews}
-                    productId={this.state.product.id}/>
-                
-                {
-                    reviews && reviews.map(review=>{
-                        return(
-                            <div key={review.id}>
-                            <h3>{review.user.name}</h3>
-                            <h4>{review.rating} stars</h4>
-                            <p>{review.text}</p>
-                            </div>
-                            
-                        )
-                    })
-                }
-            </div>
-            : null
+                    <PostReviewForm
+                        refreshReviews={this.refreshReviews}
+                        productId={this.state.product.id} />
+
+                    {
+                        reviews && reviews.map(review => {
+                            return (
+                                <div key={review.id}>
+                                    <h3>{review.user.name}</h3>
+                                    <h4>{review.rating} stars</h4>
+                                    <p>{review.text}</p>
+                                </div>
+
+                            )
+                        })
+                    }
+                </div>
+                : null
         )
     }
 }
 
 
-const mapStateToProps = (state,ownProps) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-      products: state.products,
-      itemsInCart: state.cart.itemsInCart
+        products: state.products,
+        itemsInCart: state.cart.itemsInCart
     }
-  }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchProductsfromDb: ()=>{
+        fetchProductsfromDb: () => {
             dispatch(fetchProducts())
         },
-        addItemToCart:()=>{
-            dispatch(addItemToCart())
-        },
-        placeItemInCart:()=>{
-            dispatch(placeItemInCart())
+        placeItemInCart: (productToAdd) => {
+            dispatch(placeItemInCart(productToAdd))
         }
     }
 }
-    
-  export default connect(mapStateToProps,mapDispatchToProps)(SingleProduct)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
 
