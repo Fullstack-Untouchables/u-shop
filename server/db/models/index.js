@@ -16,8 +16,15 @@ const OrderItem = require('./orderItem')
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
-Product.belongsToMany(Category, {through: 'CategoryProduct'})
-Category.belongsToMany(Product, {through: 'CategoryProduct'})
+// Product.belongsToMany(Category, {through: 'CategoryProduct'})
+// Category.belongsToMany(Product, {through: 'CategoryProduct'})
+
+// CategoryProduct.belongsTo(Product)
+// CategoryProduct.belongsTo(Category)
+
+Product.belongsTo(Category);
+Category.hasMany(Product);
+
 
 User.hasMany(Review)
 Review.belongsTo(User)
