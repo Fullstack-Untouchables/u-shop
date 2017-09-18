@@ -15,13 +15,12 @@ import store, {getCategoriesThunk, fetchProducts, fetchItemsFromCart} from './st
  */
 class Routes extends Component {
   componentDidMount () {
-    console.log("FETCH PRODUCTS", fetchProducts)
     this.props.loadInitialData()
   }
 
   render () {
     const {isLoggedIn} = this.props
-   
+
 
     return (
       <Router history={history}>
@@ -77,6 +76,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me())
       dispatch(getCategoriesThunk())
       dispatch(fetchProducts())
+      dispatch(fetchItemsFromCart())
     }
   }
 }

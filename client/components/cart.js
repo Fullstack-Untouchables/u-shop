@@ -1,46 +1,54 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import store from '../store';
-import axios from 'axios'
-import {Link} from 'react-router-dom';
-import {removeItemFromCart} from '../store'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { removeItemFromCart, removeAllItemsFromCart } from '../store'
 
+class Cart extends Component {
+    constructor(props){
+        super(props)
 
+        this.handleClick = this.handleClick.bind(this)
+        this.removeAll = this.removeAll.bind(this)
+    }
 
-  class Cart extends Component{
+    handleClick(evt) {
+        console.log("target value", evt.target.value)
+        console.log("clicked")
 
+        this.props.removeItemFromCart(evt.target.value)
+    }
 
-handleClick(evt){
-    console.log("target value",evt.target.value)
-    console.log("clicked")
+    removeAll(){
+        this.props.removeAllItemsFromCart()
+    }
 
-    const action = removeItemFromCart(evt.target.value)
-    store.dispatch(action)
-}
-
-    render(){
-        // const product = this.state.product
-        // const reviews = product.reviews
-        // console.log("PRODUCT",product)
-        // console.log(reviews)
-        console.log("CART PROPS",this.props)
-        const itemsInCart=this.props.itemsInCart
+    render() {
+        console.log("CART PROPS", this.props)
+        const itemsInCart = this.props.itemsInCart
         return (
-           <div >
-           <h1>Welcome To your Cart!</h1>
-           {
-           itemsInCart&&itemsInCart.map(item=>{
-              return(
-                  <p key={item.id}>
-                  {console.log("ID",item.id)}
-                  <img className="imgResponsive" src={item.image} />
-                  {item.name} | {item.description} | ${item.price}
-                  <button className='btn btn-danger' value={item.id} onClick={this.handleClick}>Remove From Cart</button>
-                  </p>
-                )
-            })
-           }
-           </div>
+            <div >
+                <h1>Welcome To your Cart!</h1>
+                {
+                    itemsInCart && itemsInCart.map(item => {
+                        return (
+                            <p key={item.id}>
+                                {console.log("ID", item.id)}
+                                <img className="imgResponsive" src={item.image} />
+                                {item.name} | {item.description} | ${item.price}
+                                <button
+                                    className='btn btn-danger' value={item.id}
+                                    onClick={this.handleClick}>Remove From Cart
+                                </button>
+                            </p>
+                        )
+                    })
+                }
+                <div>
+                    <button
+                        className='btn btn-danger'
+                        onClick={this.removeAll}>Empty Cart
+                    </button>
+                </div>
+            </div>
         )
     }
 }
@@ -48,8 +56,19 @@ handleClick(evt){
 const mapStateToProps = (state, ownProps) => {
     return {
         itemsInCart: state.cart.itemsInCart
-        
+
     }
 }
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeItemFromCart: (productId) => {
+            dispatch(removeItemFromCart(productId))
+        },
+        removeAllItemsFromCart: () => {
+            dispatch(removeAllItemsFromCart())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
