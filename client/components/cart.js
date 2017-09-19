@@ -54,7 +54,7 @@ class Cart extends Component {
                         onClick={this.removeAll}>Empty Cart
                     </button>
                     <Link to='/confirm'>
-                       <button className='btn btn-danger'>Checkout</button>
+                       <button className='btn btn-success'>Checkout</button>
                     </Link>
                 </div>
             </div>

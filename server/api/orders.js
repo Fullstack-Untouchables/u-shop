@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order } = require('../db/models');
+const { Order, OrderItem } = require('../db/models');
 module.exports = router
 
 /*
@@ -8,6 +8,21 @@ module.exports = router
 router.get('/', (req, res, next) => {
   Order.findAll({include: [{all: true, nested: true}]})
   .then(orders => res.json(orders))
+  .catch(next)
+})
+
+router.post('/', (req, res, next) => {
+  Order.create({
+    dateOfPurchase: '2017-09-19',
+    userId: 1,
+    // assumes cartItems is like => [{price: 19.95, quantity: 1}, {price: 21.95, quantity: 10}]
+    orderItems: req.body.cartItems
+  }, {
+    include: [{
+      model: OrderItem,
+      as: 'orderItems' }]
+  })
+  .then(order=>res.json(order))
   .catch(next)
 })
 

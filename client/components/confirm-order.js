@@ -4,7 +4,24 @@ import { connect } from 'react-redux';
 class ConfirmOrder extends Component{
     render(){
         return(<div>
-                <h3>Confim Order</h3>
+                <div>
+                    <div>
+                    <h3>Confim Order</h3>
+                        <hr />
+                        {
+                            this.props.items.map((item,i) => {
+                                return (<p key={i}>{item.name} | ${item.price}</p>)
+                            })
+
+                        }
+                        <hr/>
+                            <p>Total: ${this.props.total}</p>
+                    </div>
+                    <div>
+                        <button className='btn btn-success'>Confirm</button>
+                        <button className='btn btn-danger'>Cancel</button>
+                    </div>
+                </div>
                </div>)
     }
 }
@@ -12,6 +29,7 @@ class ConfirmOrder extends Component{
 const mapStateToProps = (state, ownProps) => {
     return {
         total: state.cart.total,
+        items: state.cart.itemsInCart
     }
 }
 
