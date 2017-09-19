@@ -25,7 +25,6 @@ class SingleProduct extends Component {
             .then(product => this.setState({ product }))
     }
 
-
     refreshReviews(review) {
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
@@ -54,7 +53,12 @@ class SingleProduct extends Component {
         // console.log("add item to cart",addItemToCart)
         // console.log("PRODUCT",product)
         // console.log(reviews)
-
+        let productInCart;
+        this.props.itemsInCart.forEach((p)=>{ if(+p.id === +product.id){
+            productInCart = true;
+        }  })
+        console.log("PRODUCT IN CART ", productInCart)
+        //console.log("PROPPPPS",this.props)
         return (
             product ?
                 <div>
@@ -63,10 +67,12 @@ class SingleProduct extends Component {
                     <h4>{product.name} | {product.description} | {product.price}</h4>
                     <img className="imgResponsive" src={product.image} />
 
-
+                    { !productInCart?
                     <button className="btn btn-success btn-lg" onClick={this.handleClick}>
                         <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
-              </button>
+                    </button> 
+                    : <h1>Already in Cart!</h1>
+                    }
 
                     <h3>Reviews</h3>
 

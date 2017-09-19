@@ -20,6 +20,7 @@ class ConfirmOrder extends Component{
                 price: item.price,
                 quantity: item.quantity,
                 productId: item.productId,
+                //userId: this.props.user.id
             }
         })
         const newOrder = { cartItems }
@@ -53,7 +54,8 @@ class ConfirmOrder extends Component{
 const mapStateToProps = (state, ownProps) => {
     return {
         total: state.cart.total,
-        items: state.cart.itemsInCart
+        items: state.cart.itemsInCart,
+        user: state.user
     }
 }
 
