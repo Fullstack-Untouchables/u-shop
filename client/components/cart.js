@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeItemFromCart, removeAllItemsFromCart } from '../store'
+import { removeItemFromCart, removeAllItemsFromCart, getCartTotal } from '../store'
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
     constructor(props){
         super(props)
-
         this.handleClick = this.handleClick.bind(this)
         this.removeAll = this.removeAll.bind(this)
     }
@@ -24,13 +24,14 @@ class Cart extends Component {
     render() {
         console.log("CART PROPS", this.props)
         const itemsInCart = this.props.itemsInCart
+        const totalPrice = this.props.total
         return (
-            <div >
+            <div>
                 <h1>Welcome To your Cart!</h1>
                 {
-                    itemsInCart && itemsInCart.map(item => {
+                    itemsInCart && itemsInCart.map((item, i) => {
                         return (
-                            <p key={item.id}>
+                            <p key={i}>
                                 {console.log("ID", item.id)}
                                 <img className="imgResponsive" src={item.image} />
                                 {item.name} | {item.description} | ${item.price}
@@ -43,10 +44,18 @@ class Cart extends Component {
                     })
                 }
                 <div>
+                    <hr />
+                    <p>Total: ${this.props.total}</p>
+                    <hr />
+                </div>
+                <div>
                     <button
                         className='btn btn-danger'
                         onClick={this.removeAll}>Empty Cart
                     </button>
+                    <Link to='/checkout'>
+                       <button className='btn btn-danger'>Checkout</button>
+                    </Link>
                 </div>
             </div>
         )
@@ -55,8 +64,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        itemsInCart: state.cart.itemsInCart
-
+        itemsInCart: state.cart.itemsInCart,
+        total: state.cart.total
     }
 }
 
@@ -67,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         removeAllItemsFromCart: () => {
             dispatch(removeAllItemsFromCart())
-        }
+        },
     }
 }
 
