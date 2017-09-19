@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products.js';
 import { placeItemInCart } from '../store';
-import axios from 'axios'
 import PostReviewForm from './post-review-form';
 import { Link } from 'react-router-dom';
 

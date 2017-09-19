@@ -14,4 +14,4 @@ export LandingPage from './landingPage'
 export SingleProduct from './SingleProduct'
 export Cart from './cart'
 export SingleCategory from './single-category'
-
+export AddProduct from './addProduct'

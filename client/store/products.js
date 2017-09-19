@@ -8,8 +8,9 @@ const initialState = {
 }
 
 //ACTIONS
-export const GET_PRODUCTS = "GET_PRODUCTS";
-export const POST_REVIEW = "POST_REVIEW"
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const POST_REVIEW = 'POST_REVIEW';
 
 
 export function getProducts(products) {
@@ -19,25 +20,25 @@ export function getProducts(products) {
     }
 }
 
-export function postReview(updatedProduct) {
+export function addProduct(newProduct){
+    return {
+        type: ADD_PRODUCT,
+        newProduct
+    }
+}
+
+export function postReview(newReview) {
     return {
         type: POST_REVIEW,
-        updatedProduct
+        newReview
     }
 }
 
-//THUNKS ///ARE WE USING THIS THUNK EVER??????????
-export function postReviewThunk(review, product) {
-    return function thunk(dispatch) {
-        axios.post(`/api/reviews`, review)
-            .then(res => res.data)
-            .then(newReview => {
-                const updatedProduct = product.reviews.push(newReview)
-                dispatch(postReview(updatedProduct))
-            })
-    }
-}
+//THUNKS 
 
+
+
+///BEING USED IN ROUTES TO FETCH ON INITAIL LOAD AND REFRESH
 export function fetchProducts() {
     return function thunk(dispatch) {
         axios.get('/api/products')
@@ -52,12 +53,45 @@ export function fetchProducts() {
     }
 }
 
+export function postProduct(newProduct){
+    console.log("INSIDE POST PRODUCT!!!!")
+    return function thunk(dispatch){
+        axios.post('/api/products', newProduct)
+        .then(res=>res.data)
+        .then(addedProduct=>{
+            const addProductAction=addProduct(addedProduct)
+            dispatch(addProductAction)
+        })
+        .catch(console.error)
+    }
+}
+
+
+
+
+
+export function postReviewThunk(review, product) {
+    return function thunk(dispatch) {
+        axios.post(`/api/reviews`, review)
+            .then(res => res.data)
+            .then(newReview => {
+                const updatedProduct = product.reviews.push(newReview)
+                dispatch(postReview(updatedProduct))
+            })
+    }
+}
+
+
+
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_PRODUCTS:
             // return Object.assign({},state,{products: action.receivedProducts})
             return action.receivedProducts
 
+        case ADD_PRODUCT:
+             console.log("INSIDE ADD PRODUCT REDUCER")
+        return 
         case POST_REVIEW:
             const productReviewed = state.products.filter(product => {
                 if (product.id === action.review.productId) return product
