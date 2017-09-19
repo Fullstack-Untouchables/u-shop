@@ -16,7 +16,7 @@ export SingleProduct from './single-product'
 export Cart from './cart'
 export SingleCategory from './single-category'
 export SearchProducts from './search-products'
-export Checkout from './checkout'
+export ConfirmOrder from './confirm-order'
 
 
 
