@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         placeItemInCart: (productToAdd) => {
             dispatch(placeItemInCart(productToAdd))
-        }
+        },
     }
 }
 
