@@ -13,7 +13,7 @@ const Searchbar = (props) => {
       <input
         name='search'
         className='search-input'
-        placeholder='Look for an item'
+        placeholder="Find what you're looking for..."
         onChange={props.handleChange}
         value={props.inputValue}
       />

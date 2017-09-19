@@ -50,10 +50,12 @@ const Main = (props) => {
             }
       </nav>
 
+      <br />
       <hr />
 
-
+      <div className='main-page'>
       {children}
+      </div>
     </div>
   )
 }

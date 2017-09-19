@@ -1,10 +1,11 @@
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0 0;
+  padding: 0 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: Rockwell, serif;
 
   a {
     text-decoration: none;
@@ -13,47 +14,64 @@ body {
   label {
     display: block;
   }
-  nav{
+  nav {
+    position: fixed;
     display: inline-block;
-    width: 100%
+    width: 100%;
+    background-color: tan;
+    border-bottom: 1px solid black;
+    height: 70px;
   }
 
   #logins {
-      align: right
+      align: right;
   }
-  nav a {
-    display: inline-block;
-    margin: 1em;
-  }
+
 
   form div {
     margin: 1em;
     display: inline-block;
   }
 
-
-
   nav a {
+    color: white;
+    display: inline-flex;
+    margin: 1em;
     float: right;
-    display: inline;
-
+    font-size: 1.2em;
+  }
+  .nav-categories {
+    float: left;
   }
   .Searchbar {
-
-    float: left;
+    position: absolute;
+    display: inline-flex;
+    left: 30%;
+    height: 100%;
     .search-input {
-      float: left;
-      margin: 16px;
-      padding: 8px;
+      display: inline-flex;
+      margin: auto;
+      height: 50%;
       width: 360px;
     }
     .search-btn {
-      float: left;
-      border: 1px solid blue;
+      border: 1px solid blanchedalmond;
+      background-color: #8A502A;
+      color: white;
       border-radius: 10%;
-      padding: 6px;
+
+      display: inline-flex;
+      margin: auto;
+      padding: 8px;
+      align-items: center;
+      height: 50%;
+      font-weight: lighter;
+      font-size: .8em;
     }
   }
+  .main-page {
+    position: absolute;
+    top: 70px;
   .nav-categories {
     float: left;
   }
@@ -61,7 +79,6 @@ body {
     height: 200px;
     width: 200px;
     size: fit;
-
   }
 }
 
