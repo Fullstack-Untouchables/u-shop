@@ -13,4 +13,5 @@ Order.prototype.getOrderTotalQuantity = () => {
   return orderItems.reduce((total, item) => total += item.quantity)
 }
 
+
 module.exports = Order

@@ -3,9 +3,9 @@ import axios from 'axios';
 
 const initialState = {
     orders: [],
-    total: 0,
-    items: [],
-    user: '',
+    // total: 0,
+    // items: [],
+    // user: '',
 }
 
 const PLACE_ORDER = 'PLACE_ORDER';
@@ -19,14 +19,19 @@ export function placeOrderAction(order){
 
 export function placeOrder(newOrder) {
     return function(dispatch) {
-        axios.post()
+        axios.post('/api/orders', newOrder)
+        .then(res => res.data)
+        .then(newOrder=> {
+            dispatch(placeOrderAction(newOrder))
+        })
+        .catch(console.error)
     }
 }
 
 export default function (state = initialState, action) {
     switch(action.type) {
         case PLACE_ORDER:
-
+            return Object.assign({}, state, {orders: [...state.orders, action.order]})
         default:
             return state
     }
