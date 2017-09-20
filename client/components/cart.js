@@ -10,36 +10,51 @@ class Cart extends Component {
         this.removeAll = this.removeAll.bind(this)
     }
 
+    handleClick(evt) {
+        this.props.removeItemFromCart(evt.target.value)
+    }
+
     removeAll(){
         this.props.removeAllItemsFromCart()
     }
 
     render() {
-        console.log("CART PROPS", this.props)
         const itemsInCart = this.props.itemsInCart
         const totalPrice = this.props.total
         return (
-            <div>
-                <h1>Welcome To your Cart!</h1>
+            <div className='cart-list'>
+                <br />
+                <header className='cart-list-header'>
+                <h2>Shopping Cart</h2>
+                </header>
+                <br/>
                 {
                     itemsInCart && itemsInCart.map((item, i) => {
                         return (<div key={i}><CartItem item={item}/></div>)
                     })
                 }
+                <div className='cart-total'>
                 <div>
                     <hr />
-                    <p>Total: ${this.props.total}</p>
+
+                    <h4>Total: ${this.props.total}</h4>
+
                     <hr />
                 </div>
-                <div>
+                <div className='cart-total'>
                     <button
-                        className='btn btn-danger'
+                        className='btn-remove'
                         onClick={this.removeAll}>Empty Cart
                     </button>
+
                     <Link to='/confirm'>
                        <button className='btn btn-success'>Checkout</button>
                     </Link>
                 </div>
+
+                </div>
+                <br />
+                <hr />
             </div>
         )
     }

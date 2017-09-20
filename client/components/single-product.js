@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products.js';
-import { placeItemInCart } from '../store';
-import axios from 'axios'
+import { placeItemInCart, destroyProduct } from '../store';
 import PostReviewForm from './post-review-form';
 import { Link } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ class SingleProduct extends Component {
             quantity: 1,
             quantityPrice: product.price,
         }
-        console.log(productToAdd)
+        // console.log(productToAdd)
         this.props.placeItemInCart(productToAdd)
     }
 
@@ -52,10 +52,18 @@ class SingleProduct extends Component {
         console.log("SINGLE PRODUCT PROPS", this.props.itemsInCart)
         const product = this.state.product
         const reviews = product.reviews
+
         let productInCart;
         this.props.itemsInCart.forEach((p)=>{ if(+p.id === +product.id){
             productInCart = true;
         }  })
+
+        const isAdmin = this.props.isAdmin
+        // console.log("add item to cart",addItemToCart)
+        // console.log("PRODUCT",product)
+        // console.log(reviews)
+        console.log(destroyProduct)
+
         return (
             product ?
                 <div>
@@ -67,9 +75,19 @@ class SingleProduct extends Component {
                     { !productInCart?
                     <button className="btn btn-success btn-lg" onClick={this.handleClick}>
                         <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+
                     </button> 
                     : <h1>Already in Cart!</h1>
+                    </button>
                     }
+              {
+                isAdmin? <div>
+                <Link to ={`/products/edit/${product.id}`}><button className="btn btn-warning">EDIT PRODUCT</button></Link>
+                <button className="btn btn-danger" onClick={()=>(destroyProduct(this.state.product))}>DELETE PRODUCT</button>
+                </div>
+                :
+                null
+              }
 
                     <h3>Reviews</h3>
 
@@ -98,7 +116,8 @@ class SingleProduct extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         products: state.products,
-        itemsInCart: state.cart.itemsInCart
+        itemsInCart: state.cart.itemsInCart,
+        isAdmin: state.user.isAdmin
     }
 }
 
@@ -110,6 +129,9 @@ const mapDispatchToProps = (dispatch) => {
         placeItemInCart: (productToAdd) => {
             dispatch(placeItemInCart(productToAdd))
         },
+        destroyProduct: (productToDelete)=>{
+            dispatch(destroyProduct(productToDelete))
+        }
     }
 }
 
