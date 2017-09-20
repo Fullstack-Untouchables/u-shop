@@ -39,7 +39,9 @@ class SingleProduct extends Component {
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image
+            description: product.description,
+            image: product.image,
+            quantity: 1
         }
         console.log(productToAdd)
         this.props.placeItemInCart(productToAdd)
@@ -57,8 +59,8 @@ class SingleProduct extends Component {
         this.props.itemsInCart.forEach((p)=>{ if(+p.id === +product.id){
             productInCart = true;
         }  })
-        console.log("PRODUCT IN CART ", productInCart)
-        //console.log("PROPPPPS",this.props)
+        //console.log("PRODUCT IN CART ", productInCart)
+        console.log("STATEEEE",this.state)
         return (
             product ?
                 <div>

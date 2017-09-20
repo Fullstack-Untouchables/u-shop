@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Order.create({
     dateOfPurchase: new Date(),
-    userId: 1, // req.body.cartItems[0].userId, req.user.id || req.body.cartItems[0].userId 
+    userId: req.user.id || req.body.cartItems[0].userId, 
     // assumes cartItems is like => [{price: 19.95, quantity: 1}, {price: 21.95, quantity: 10}]
     orderItems: req.body.cartItems
   }, {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {removeAllItemsFromCart} from './index.js';
 
 const initialState = {
     orders: [],
@@ -23,6 +23,7 @@ export function placeOrder(newOrder) {
         .then(res => res.data)
         .then(newOrder=> {
             dispatch(placeOrderAction(newOrder))
+            dispatch(removeAllItemsFromCart())
         })
         .catch(console.error)
     }

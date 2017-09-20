@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { placeOrder} from '../store';
+import { placeOrder, removeAllItemsFromCart } from '../store';
 
 class ConfirmOrder extends Component{
     constructor(props){
         super(props)
-
         this.handleConfirm = this.handleConfirm.bind(this)
     }
 
@@ -25,6 +24,7 @@ class ConfirmOrder extends Component{
         })
         const newOrder = { cartItems }
         this.props.postOrder(newOrder)
+        //this.props.emptyCart()
     }
 
     render(){
@@ -63,6 +63,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         postOrder: (order) => {
             dispatch(placeOrder(order))
+        },
+        emptyCart: () => {
+            dispatch(removeAllItemsFromCart())
         }
     }
 }

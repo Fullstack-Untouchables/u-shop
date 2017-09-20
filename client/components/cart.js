@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeItemFromCart, removeAllItemsFromCart, getCartTotal } from '../store'
 import { Link } from 'react-router-dom';
+import CartItem from './cart-item';
 
 class Cart extends Component {
     constructor(props){
         super(props)
-        this.handleClick = this.handleClick.bind(this)
         this.removeAll = this.removeAll.bind(this)
-    }
-
-    handleClick(evt) {
-        console.log("target value", evt.target.value)
-        console.log("clicked")
-
-        this.props.removeItemFromCart(evt.target.value)
     }
 
     removeAll(){
@@ -30,17 +23,7 @@ class Cart extends Component {
                 <h1>Welcome To your Cart!</h1>
                 {
                     itemsInCart && itemsInCart.map((item, i) => {
-                        return (
-                            <p key={i}>
-                                {console.log("ID", item.id)}
-                                <img className="imgResponsive" src={item.image} />
-                                {item.name} | {item.description} | ${item.price}
-                                <button
-                                    className='btn btn-danger' value={item.id}
-                                    onClick={this.handleClick}>Remove From Cart
-                                </button>
-                            </p>
-                        )
+                        return (<div key={i}><CartItem item={item} /></div>)
                     })
                 }
                 <div>
@@ -71,9 +54,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeItemFromCart: (productId) => {
-            dispatch(removeItemFromCart(productId))
-        },
+        // removeItemFromCart: (productId) => {
+        //     dispatch(removeItemFromCart(productId))
+        // },
         removeAllItemsFromCart: () => {
             dispatch(removeAllItemsFromCart())
         },

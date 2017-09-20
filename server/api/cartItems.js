@@ -12,15 +12,19 @@ router.post('/', (req, res, next) => {
         req.session.cart = [...req.session.cart, {
             id: req.body.id,
             price: req.body.price,
+            description: req.body.description,
             name: req.body.name,
-            image: req.body.image
+            image: req.body.image,
+            quantity: req.body.quantity
         }]
     } else {
         req.session.cart = [{
             id: req.body.id,
             price: req.body.price,
+            description: req.body.description,
             name: req.body.name,
-            image: req.body.image
+            image: req.body.image,
+            quantity: req.body.quantity
         }]
     }
     console.log("session", req.session)
