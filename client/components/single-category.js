@@ -13,22 +13,23 @@ class SingleCategory extends Component {
     }
 
     render(){
-        console.log("SINGLE CATEGORY PROPS", this.props)
+        // console.log("SINGLE CATEGORY PROPS", this.props)
         const categoryId = +this.props.match.params.categoryId
         const categories=this.props.categories
-        const products = this.props.products
+        const products = this.props.products.products
+        const isAdmin = this.props.isAdmin
         console.log(products.length&& categories.length)
 
         if(products.length&& categories.length){
             //categoryId is coming from match.params - router
         const selectedCategory= categories.filter(category=>category.id===categoryId)[0]
         const filteredProducts= products.filter(product=>+product.categoryId===categoryId) 
-        console.log("FILTERED", filteredProducts)
-        console.log("SELECTED CATEGORY", selectedCategory)
-        console.log("SELECTED CATEGORY", selectedCategory.name)
+        // console.log("FILTERED", filteredProducts)
+        // console.log("SELECTED CATEGORY", selectedCategory)
+        // console.log("SELECTED CATEGORY", selectedCategory.name)
         
-        console.log("products", products)
-        console.log("CATEGORY ID", categoryId)
+        // console.log("products", products)
+        // console.log("CATEGORY ID", categoryId)
         return(
         <div>
             <h1>hello</h1>
@@ -45,6 +46,14 @@ class SingleCategory extends Component {
                                     {product.name} | {product.description} | ${product.price}
                                     </Link>
                                 </p>
+                                {
+                                    isAdmin? <div>
+                                    <Link to ={`/products/edit/${product.id}`}><button className="btn btn-warning">EDIT PRODUCT</button></Link>
+                                    <button className="btn btn-danger">DELETE PRODUCT</button>
+                                    </div>
+                                    :
+                                    null
+                                  }
                             
                         </div>
                     )
@@ -59,7 +68,8 @@ class SingleCategory extends Component {
 const mapStateToProps=(state)=>{
     return{
         products: state.products,
-        categories: state.categories
+        categories: state.categories,
+        isAdmin: state.user.isAdmin
     }
 }
 

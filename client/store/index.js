@@ -5,13 +5,14 @@ import user from './user'
 import products from './products'
 import searchbar from './searchbar'
 import categories from './categories'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import cart from './cart'
 
 const reducer = combineReducers({user, products, searchbar, categories, cart})
 
 
-const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
 const store = createStore(reducer, middleware)
 
 export default store

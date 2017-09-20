@@ -8,19 +8,19 @@ const Searchbar = (props) => {
 
   console.log(props.inputValue)
   return (
-    <form className='form-inline'>
+    <form className='Searchbar'>
+
       <input
         name='search'
-        className='form-control'
-        placeholder='Look for an item'
+        className='search-input'
+        placeholder="Find what you're looking for..."
         onChange={props.handleChange}
         value={props.inputValue}
       />
-      <Link to={`/products/search/${props.inputValue}`} className='btn btn-link'>
-        <button className="btn btn-outline-success" type="submit">
+      <Link to={`/products/search/${props.inputValue}`} className='search-btn'>
         Search
-        </button>
       </Link>
+
     </form>
   )
 }

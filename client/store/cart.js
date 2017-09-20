@@ -3,13 +3,15 @@ import axios from 'axios'
 const initialState = {
     itemsInCart: [],
     newItemEntry: {},
-    itemToDeleteId: ''
+    itemToDeleteId: '',
+    total: 0
 }
 
 export const GET_ITEMS_IN_CART = "GET_ITEMS_IN_CART";
 export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
 export const DELETE_ITEM_FROM_CART = "DELETE_ITEM_FROM_CART";
 export const DELETE_ALL_ITEMS_FROM_CART = "DELETE_ALL_ITEMS_FROM_CART";
+export const GET_CART_TOTAL = "GET_CART_TOTAL";
 
 
 //action creators
@@ -39,6 +41,12 @@ export function getItemsInCart(items) {
     }
 }
 
+export function getCartTotal(){
+    return {
+        type: GET_CART_TOTAL,
+    }
+}
+
 export function fetchItemsFromCart() {
     return function thunk(dispatch) {
         axios.get('/api/cartItems')
@@ -46,6 +54,7 @@ export function fetchItemsFromCart() {
         .then(cartItems => {
             console.log("items from cookie", cartItems)
             dispatch(getItemsInCart(cartItems))
+            dispatch(getCartTotal())
         })
     }
 }
@@ -57,6 +66,7 @@ export function placeItemInCart(newItemEntry) {
         .then(res => res.data)
         .then(() => {
             dispatch(addItemToCart(newItemEntry))
+            dispatch(getCartTotal())
         })
     }
 }
@@ -68,6 +78,7 @@ export function removeItemFromCart(itemToDeleteId) {
         .then(res => res.data)
         .then(() => {
             dispatch(deleteItemFromCart(itemToDeleteId))
+            dispatch(getCartTotal())
         })
     }
 }
@@ -78,6 +89,7 @@ export function removeAllItemsFromCart() {
         .then(res => res.data)
         .then(() => {
             dispatch(deleteAllItemsFromCart())
+            dispatch(getCartTotal())
         })
     }
 }
@@ -97,6 +109,12 @@ export default function (state = initialState, action) {
 
         case DELETE_ALL_ITEMS_FROM_CART:
             return Object.assign({}, state, { itemsInCart: [] })
+        
+        case GET_CART_TOTAL:
+            const totalPrice = state.itemsInCart.reduce((sum, currentItem)=>{
+                return sum + Number(currentItem.price)
+            }, 0) 
+            return Object.assign({}, state, { total: totalPrice })
 
         default:
             return state
