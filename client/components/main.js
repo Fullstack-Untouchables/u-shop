@@ -30,12 +30,6 @@ const Main = (props) => {
                     My Page
                   </Link>
                   <a href='#' onClick={handleClick}>Logout</a>
-                  <Link to='/cart' className='cart'>
-                    Cart
-                  </Link>
-                  <Link to='/products' className='cart'>
-                  Products
-                </Link>
                  </div>
                 :
                 <div>
@@ -46,16 +40,13 @@ const Main = (props) => {
                   <Link to='/signup'>
                     Sign Up
                   </Link>
-                  <Link to='/cart' className='cart'>
-                    Cart
-                  </Link>
-                  <Link to='/products' className='cart'>
-                  Products
-                </Link>
                 </div>
             }
         <Link to='/cart' className='cart'>
           Cart
+        </Link>
+        <Link to='/products' className='cart'>
+                  Products
         </Link>
       </nav>
 

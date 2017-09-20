@@ -48,7 +48,7 @@ class Cart extends Component {
                     </button>
 
                     <Link to='/confirm'>
-                       <button className='btn btn-success'>Checkout</button>
+                       <button className='btn btn-checkout'>Checkout</button>
                     </Link>
                 </div>
 
