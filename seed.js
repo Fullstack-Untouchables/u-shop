@@ -8,10 +8,10 @@ const db = new Sequelize(
 
 
   const users = [
-    {name: 'Oscar', email: 'oscar@gmail.com', isAdmin: true},
-    {name: 'Bojan', email: 'bojan@gmail.com', isAdmin: true},
-    {name: 'Jason', email: 'jasonrosso@gmail.com', isAdmin: true},
-    {name: 'Peter', email: 'peter@gmail.com', isAdmin: true},
+    // {name: 'Oscar', email: 'oscar@gmail.com', isAdmin: true},
+    // {name: 'Bojan', email: 'bojan@gmail.com', isAdmin: true},
+    // {name: 'Jason', email: 'jasonrosso@gmail.com', isAdmin: true},
+    // {name: 'Peter', email: 'peter@gmail.com', isAdmin: true},
   ]
 
   const products = [
