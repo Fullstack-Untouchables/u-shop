@@ -4,9 +4,8 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-
 import { Main, Login, Signup, UserHome, ProductList, SingleProduct,
-         Categories, LandingPage, Cart, SingleCategory, SearchProducts, Checkout } from './components'
+         Categories, LandingPage, Cart, SingleCategory, SearchProducts, Checkout, AddProduct, EditProduct } from './components'
 import {me} from './store'
 import store, {getCategoriesThunk, fetchProducts, fetchItemsFromCart} from './store';
 
@@ -22,7 +21,9 @@ class Routes extends Component {
   render () {
     const {isLoggedIn} = this.props
     const {products} = this.props.products
-
+    const isAdmin = this.props.isAdmin
+    // console.log("FROM ROUTES!!!@@##$$")
+    // console.log("PROPS FROM ROUtes !@$@", {isAdmin})
     
     return (
       <Router history={history}>
@@ -30,8 +31,11 @@ class Routes extends Component {
 
           <Switch>
             {/* Routes placed here are available to all visitors */}
+             
+             <Route exact path ='/products/add' component={AddProduct} />
+             <Route exact path ='/products/edit/:productId' component={EditProduct} />
              <Route exact path='/checkout' component={Checkout} />
-             <Route exact path='/products' render={() => <ProductList products={products} />} />} />
+             <Route exact path='/products' render={() => <ProductList products={products} isAdmin={isAdmin} />} />} />
              <Route exact path='/products/:productId' component={SingleProduct} />
              <Route exact path='/products/search/:inputValue' component={SearchProducts} />
              <Route exact path='/categories/:categoryId' component={SingleCategory} />
@@ -70,7 +74,8 @@ const mapState = (state) => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     itemsInCart: state.cart.itemsInCart,
-    products: state.products
+    products: state.products,
+    isAdmin: state.user.isAdmin
   }
 }
 

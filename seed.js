@@ -45,13 +45,13 @@ const db = new Sequelize(
 
 
 const seed = () =>
-  Promise.all(users.map(user =>
-    User.create(user))
-  )
-    .then(() =>
+  // Promise.all(users.map(user =>
+  //   User.create(user))
+  // )
+  //   .then(() =>
       Promise.all(categories.map(category =>
         Category.create(category))
-      ))
+      )
     .then(() =>
       Promise.all(products.map(product =>
         Product.create(product))
