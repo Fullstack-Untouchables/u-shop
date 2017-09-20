@@ -7,12 +7,12 @@ const db = new Sequelize(
   `postgres://localhost:5432/${pkg.name}`)
 
 
-  const users = [
-    {name: 'Oscar', email: 'oscar@gmail.com', isAdmin: true},
-    {name: 'Bojan', email: 'bojan@gmail.com', isAdmin: true},
-    {name: 'Jason', email: 'jasonrosso@gmail.com', isAdmin: true},
-    {name: 'Peter', email: 'peter@gmail.com', isAdmin: true},
-  ]
+  // const users = [
+  //   {name: 'Oscar', email: 'oscar@gmail.com', isAdmin: true},
+  //   {name: 'Bojan', email: 'bojan@gmail.com', isAdmin: true},
+  //   {name: 'Jason', email: 'jasonrosso@gmail.com', isAdmin: true},
+  //   {name: 'Peter', email: 'peter@gmail.com', isAdmin: true},
+  // ]
 
   const products = [
 
@@ -45,13 +45,13 @@ const db = new Sequelize(
 
 
 const seed = () =>
-  Promise.all(users.map(user =>
-    User.create(user))
-  )
-    .then(() =>
+  // Promise.all(users.map(user =>
+  //   User.create(user))
+  // )
+  //   .then(() =>
       Promise.all(categories.map(category =>
         Category.create(category))
-      ))
+      )
     .then(() =>
       Promise.all(products.map(product =>
         Product.create(product))

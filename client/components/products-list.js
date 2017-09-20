@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProducts, getProducts } from '../store/products.js';
+import { fetchProducts, getProducts, destroyProduct } from '../store/products.js';
 import store from '../store'
+import ProductLine from './product-line';
+
 
 
 
@@ -10,46 +12,26 @@ import store from '../store'
  const ProductList = (props) => {
 
     console.log("PRODUCT LIST PROPS", props);
+    console.log(destroyProduct)
     const products = props.products;
-
-    return (
-      <div className='product-list'>
-        <br  />
-        <header className='product-list-header'>
-          <h2>New Products</h2>
-        </header>
-
-
-          <br />
+    const isAdmin = props.isAdmin
+    //const destroy = props.destroyProduct();
+    return (<div>
+          {
+            isAdmin? <h1>HELLO ADMIN</h1>:null
+          }
+        <h3>Products</h3>
+        {isAdmin? <Link to={'products/add'}><button className="btn btn-success">ADD A PRODUCT</button></Link>:null}
+          <hr />
 
           {
             products.length && products.map(product => {
-              return (
-                <div key={product.id} className='product-list-item'>
-                  <Link to={`/products/${product.id}`}>
-                    <div className='product-image'>
-                      <img className="imgResponsive" src={product.image}/>
-                    </div>
-                  </Link>
-
-                  <div className='product-info'>
-                    <Link to={`/products/${product.id}`}>
-                      <h3>{product.name}</h3>
-                    </Link>
-                    <h4>${product.price}</h4>
-                    <p>Description: {product.description}</p>
-
-                    <p>Category: <Link to={`/categories/${product.category.id}`}>{product.category.name}</Link></p>
-                  </div>
-
-                </div>
-              )
+              return (<div key={product.id}><ProductLine product={product} isAdmin={isAdmin}/></div>)
             })
           }
         </div>)
 
-  }
+    }    
 
-
-export default ProductList;
+export default ProductList
 
