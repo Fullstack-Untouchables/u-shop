@@ -17,7 +17,7 @@ const Searchbar = (props) => {
         onChange={props.handleChange}
         value={props.inputValue}
       />
-      <Link to={`/products/search/${props.inputValue}`} className='search-btn'>
+      <Link to={`/products/search/${props.inputValue}`} className='btn-search'>
         Search
       </Link>
 

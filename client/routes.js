@@ -23,7 +23,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
     const {products} = this.props.products
 
-    
+
     return (
       <Router history={history}>
         <Main>
@@ -59,7 +59,7 @@ class Routes extends Component {
       </Router>
     )
   }
-} 
+}
 
 /**
  * CONTAINER

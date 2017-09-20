@@ -11,9 +11,6 @@ class Cart extends Component {
     }
 
     handleClick(evt) {
-        console.log("target value", evt.target.value)
-        console.log("clicked")
-
         this.props.removeItemFromCart(evt.target.value)
     }
 
@@ -22,41 +19,63 @@ class Cart extends Component {
     }
 
     render() {
-        console.log("CART PROPS", this.props)
         const itemsInCart = this.props.itemsInCart
         const totalPrice = this.props.total
         return (
-            <div>
-                <h1>Welcome To your Cart!</h1>
+            <div className='cart-list'>
+                <br />
+                <header className='cart-list-header'>
+                <h2>Shopping Cart</h2>
+                </header>
+                <br/>
                 {
                     itemsInCart && itemsInCart.map((item, i) => {
                         return (
-                            <p key={i}>
-                                {console.log("ID", item.id)}
-                                <img className="imgResponsive" src={item.image} />
-                                {item.name} | {item.description} | ${item.price}
+                            <div key={i} className='cart-list-item'>
+
+                                <Link to={`/products/${item.id}`}>
+                                    <div className='cart-item-image'>
+                                        <img className="imgResponsive" src={item.image} />
+                                    </div>
+                                </Link>
+
+                                <div className='product-info'>
+                                    <Link to={`/products/${item.id}`}>
+                                        <h3>{item.name}</h3>
+                                    </Link>
+                                    <h4>${item.price}</h4>
+                                    <p>Description: {item.description}</p>
+
                                 <button
-                                    className='btn btn-danger' value={item.id}
+                                    className='btn-remove' value={item.id}
                                     onClick={this.handleClick}>Remove From Cart
                                 </button>
-                            </p>
+                                </div>
+                            </div>
                         )
                     })
                 }
+                <div className='cart-total'>
                 <div>
                     <hr />
-                    <p>Total: ${this.props.total}</p>
+
+                    <h4>Total: ${this.props.total}</h4>
+
                     <hr />
                 </div>
-                <div>
+                <div className='cart-total'>
                     <button
-                        className='btn btn-danger'
+                        className='btn-remove'
                         onClick={this.removeAll}>Empty Cart
                     </button>
                     <Link to='/checkout'>
-                       <button className='btn btn-danger'>Checkout</button>
+                       <button className='btn-checkout'>Checkout</button>
                     </Link>
                 </div>
+
+                </div>
+                <br />
+                <hr />
             </div>
         )
     }
