@@ -54,9 +54,11 @@ const Main = (props) => {
                 </Link>
                 </div>
             }
+        <Link to='/cart' className='cart'>
+          Cart
+        </Link>
       </nav>
 
-      <br />
       <hr />
 
       <div className='main-page'>

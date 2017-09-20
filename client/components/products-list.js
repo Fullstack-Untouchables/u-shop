@@ -10,7 +10,7 @@ import ProductLine from './product-line';
 
 
  const ProductList = (props) => {
-   
+
     console.log("PRODUCT LIST PROPS", props);
     console.log(destroyProduct)
     const products = props.products;

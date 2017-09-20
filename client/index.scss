@@ -21,6 +21,7 @@ body {
     background-color: tan;
     border-bottom: 1px solid black;
     height: 70px;
+    z-index: 100;
   }
 
   #logins {
@@ -40,6 +41,7 @@ body {
     float: right;
     font-size: 1.2em;
   }
+
   .nav-categories {
     float: left;
   }
@@ -54,7 +56,7 @@ body {
       height: 50%;
       width: 360px;
     }
-    .search-btn {
+    .btn-search {
       border: 1px solid blanchedalmond;
       background-color: #8A502A;
       color: white;
@@ -69,18 +71,82 @@ body {
       font-size: .8em;
     }
   }
+
   .main-page {
     position: absolute;
+    display: flex;
     top: 70px;
+
+    width: 100%;
   }
 
-  .nav-categories {
+  .product-list, .cart-list {
+    position: relative;
+    margin: auto;
+    display: block;
+    width: 90%;
+
+  }
+  .product-list-header, .cart-list-header {
+    border-bottom: 2px solid lightgrey;
+  }
+  .product-list-item, .cart-list-item {
+    border-bottom: 1px solid lightgrey;
     float: left;
+    clear: left;
+    width: 100%;
+    margin-top: 30px;
   }
   .imgResponsive{
-    height: 200px;
-    width: 200px;
+    height: 240px;
+    width: 240px;
     size: fit;
+  }
+  .product-image, .cart-item-image{
+    display: inline-block;
+    position: relative;
+    left: 50px;
+    margin: 0 80px 40px 80px;
+
+    float: left;
+    clear: left;
+  }
+  .product-info {
+    display: inline-block;
+    position: relative;
+    float: left;
+    left: 30px;
+  }
+  .btn-remove{
+    border: 1px solid #D6B5A2;
+    background-color: #FF7220;
+    color: white;
+    border-radius: 10%;
+
+    display: inline-flex;
+    margin: 20px 0 40px 0;
+    padding: 8px;
+    align-items: center;
+    height: 50%;
+    font-weight: lighter;
+    font-size: .8em;
+  }
+  .btn-checkout{
+    border: 1px solid #D6B5A2;
+    background-color: #009E42;
+    color: white;
+    border-radius: 10%;
+
+    display: inline-flex;
+    margin: 20px 0 40px 0;
+    padding: 8px;
+    align-items: center;
+    height: 50%;
+    font-weight: lighter;
+    font-size: .8em;
+  }
+  .cart-total {
+    float: right;
   }
 }
 }

@@ -63,7 +63,7 @@ class Routes extends Component {
       </Router>
     )
   }
-} 
+}
 
 /**
  * CONTAINER
