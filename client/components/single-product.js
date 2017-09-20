@@ -76,9 +76,8 @@ class SingleProduct extends Component {
                     <button className="btn btn-success btn-lg" onClick={this.handleClick}>
                         <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
 
-                    </button> 
-                    : <h1>Already in Cart!</h1>
                     </button>
+                    : <h1>Already in Cart!</h1>
                     }
               {
                 isAdmin? <div>
