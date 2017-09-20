@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User, Order} = require('../db/models');
+const gatekeepers = require('../utils/gatekeepers')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -13,7 +14,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', gatekeepers.admin, (req, res, next) => {
   User.create(req.body)
   .then(user => res.json(user))
   .catch(next)
@@ -23,24 +24,22 @@ router.get('/:userId', (req, res, next) => {
   const userId = req.params.userId
 
   User.findById(userId)
-  .then(user => res.json(user))
+  .then(user => res.json({id: user.id, email: user.email}))
   .catch(next)
 })
 
-router.put('/:userId', (req, res, next) => {
+router.put('/:userId', gatekeepers.admin, (req, res, next) => {
   const userId = req.params.userId
 
   User.findById(userId)
   .then(user => user.update(req.body, {returning:true}))
   .then(updated => {
-    // console.log(updated.dataValues)
-    // res.status(204).json(updated.user)}
     res.status(200).json(updated)
   })
   .catch(next)
 })
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', gatekeepers.admin, (req, res, next) => {
   const userId = req.params.userId
 
   User.destroy({

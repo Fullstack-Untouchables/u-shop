@@ -10,16 +10,19 @@ router.post('/login', (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send('Incorrect password')
       } else {
-        req.login(user, err => err ? next(err) : res.json(user))
+        req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.email}))
       }
     })
     .catch(next)
 })
 
 router.post('/signup', (req, res, next) => {
+  // Prevent assigning admin priviliges during sign-up.
+  delete req.body.isAdmin;
+
   User.create(req.body)
     .then(user => {
-      req.login(user, err => err ? next(err) : res.json(user))
+      req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.email}))
     })
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError')

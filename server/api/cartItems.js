@@ -7,7 +7,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    console.log('cart item body', req.body)
     if (req.session.cart) {
         req.session.cart = [...req.session.cart, {
             id: req.body.id,
@@ -33,7 +32,15 @@ router.delete('/', (req, res, next) => {
 })
 
 router.put('/:productId', (req, res, next) => {
-
+    let itemIdx = req.session.cart.findIndex(item => item.id === req.params.productId)
+    req.session.cart.cartItem[itemIdx] = {
+        id: req.body.id,
+        price: req.body.price,
+        name: req.body.name,
+        image: req.body.image
+    }
+    console.log("session", req.session)
+    res.sendStatus(204)
 })
 
 router.delete('/:productId', (req, res, next) => {
