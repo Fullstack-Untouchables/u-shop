@@ -33,6 +33,9 @@ const Main = (props) => {
                   <Link to='/cart' className='cart'>
                     Cart
                   </Link>
+                  <Link to='/products' className='cart'>
+                  Products
+                </Link>
                  </div>
                 :
                 <div>
@@ -46,6 +49,9 @@ const Main = (props) => {
                   <Link to='/cart' className='cart'>
                     Cart
                   </Link>
+                  <Link to='/products' className='cart'>
+                  Products
+                </Link>
                 </div>
             }
       </nav>
