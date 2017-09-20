@@ -12,13 +12,14 @@ class ConfirmOrder extends Component{
         let cartItems = this.props.items
         cartItems.forEach(item=>{
             item.productId = item.id;
-            item.quantity = 1;
+            //item.quantity = 1;
         })
         cartItems = cartItems.map(item => {
             return {
                 price: item.price,
                 quantity: item.quantity,
                 productId: item.productId,
+                quantity: item.quantity
                 //userId: this.props.user.id
             }
         })
