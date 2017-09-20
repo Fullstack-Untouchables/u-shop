@@ -23,7 +23,7 @@ class Routes extends Component {
     const isAdmin = this.props.isAdmin
     // console.log("FROM ROUTES!!!@@##$$")
     // console.log("PROPS FROM ROUtes !@$@", {isAdmin})
-    
+
     return (
       <Router history={history}>
         <Main>
@@ -31,7 +31,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are available to all visitors */}
              <Route exact path='/confirm' component={ConfirmOrder} />
-             <Route exact path='/products' render={() => <ProductList products={products} />} />} />
+             <Route exact path='/products' render={() => <ProductList products={products} isAdmin={isAdmin}/>} />} />
              <Route exact path ='/products/add' component={AddProduct} />
              <Route exact path ='/products/edit/:productId' component={EditProduct} />
              <Route exact path='/checkout' component={Checkout} />
@@ -54,7 +54,7 @@ class Routes extends Component {
             }
             {/* Displays our Landing Page component as a fallback */}
 
-            <Route render={() => <ProductList products={products} />} />} />
+            <Route render={() => <ProductList products={products} isAdmin={isAdmin}/>} />} />
 
 
 
