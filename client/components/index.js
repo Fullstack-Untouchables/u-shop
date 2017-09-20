@@ -18,7 +18,7 @@ export SingleCategory from './single-category'
 export AddProduct from './addProduct'
 export EditProduct from './editProduct'
 export SearchProducts from './search-products'
-export Checkout from './checkout'
+export ConfirmOrder from './confirm-order'
 
 
 

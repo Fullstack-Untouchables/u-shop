@@ -5,11 +5,12 @@ import user from './user'
 import products from './products'
 import searchbar from './searchbar'
 import categories from './categories'
+import orders from './orders'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import cart from './cart'
 
-const reducer = combineReducers({user, products, searchbar, categories, cart})
+const reducer = combineReducers({user, products, searchbar, categories, cart, orders})
 
 
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
@@ -21,4 +22,5 @@ export * from './searchbar'
 export * from './categories'
 export * from './products'
 export * from './cart'
+export * from './orders'
 

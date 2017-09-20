@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeItemFromCart, removeAllItemsFromCart, getCartTotal } from '../store'
 import { Link } from 'react-router-dom';
+import CartItem from './cart-item';
 
 class Cart extends Component {
     constructor(props){
         super(props)
-        this.handleClick = this.handleClick.bind(this)
         this.removeAll = this.removeAll.bind(this)
     }
 
@@ -30,29 +30,7 @@ class Cart extends Component {
                 <br/>
                 {
                     itemsInCart && itemsInCart.map((item, i) => {
-                        return (
-                            <div key={i} className='cart-list-item'>
-
-                                <Link to={`/products/${item.id}`}>
-                                    <div className='cart-item-image'>
-                                        <img className="imgResponsive" src={item.image} />
-                                    </div>
-                                </Link>
-
-                                <div className='product-info'>
-                                    <Link to={`/products/${item.id}`}>
-                                        <h3>{item.name}</h3>
-                                    </Link>
-                                    <h4>${item.price}</h4>
-                                    <p>Description: {item.description}</p>
-
-                                <button
-                                    className='btn-remove' value={item.id}
-                                    onClick={this.handleClick}>Remove From Cart
-                                </button>
-                                </div>
-                            </div>
-                        )
+                        return (<div key={i}><CartItem item={item}/></div>)
                     })
                 }
                 <div className='cart-total'>
@@ -68,8 +46,9 @@ class Cart extends Component {
                         className='btn-remove'
                         onClick={this.removeAll}>Empty Cart
                     </button>
-                    <Link to='/checkout'>
-                       <button className='btn-checkout'>Checkout</button>
+
+                    <Link to='/confirm'>
+                       <button className='btn btn-success'>Checkout</button>
                     </Link>
                 </div>
 
@@ -90,9 +69,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeItemFromCart: (productId) => {
-            dispatch(removeItemFromCart(productId))
-        },
+        // removeItemFromCart: (productId) => {
+        //     dispatch(removeItemFromCart(productId))
+        // },
         removeAllItemsFromCart: () => {
             dispatch(removeAllItemsFromCart())
         },

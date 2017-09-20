@@ -25,7 +25,6 @@ class SingleProduct extends Component {
             .then(product => this.setState({ product }))
     }
 
-
     refreshReviews(review) {
         const productId = this.props.match.params.productId
         axios.get(`/api/products/${productId}`)
@@ -35,12 +34,14 @@ class SingleProduct extends Component {
 
     handleClick(evt) {
         const product = this.state.product
-        console.log("clicked")
         const productToAdd = {
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image
+            description: product.description,
+            image: product.image,
+            quantity: 1,
+            quantityPrice: product.price,
         }
         // console.log(productToAdd)
         this.props.placeItemInCart(productToAdd)
@@ -51,11 +52,18 @@ class SingleProduct extends Component {
         console.log("SINGLE PRODUCT PROPS", this.props.itemsInCart)
         const product = this.state.product
         const reviews = product.reviews
+
+        let productInCart;
+        this.props.itemsInCart.forEach((p)=>{ if(+p.id === +product.id){
+            productInCart = true;
+        }  })
+
         const isAdmin = this.props.isAdmin
         // console.log("add item to cart",addItemToCart)
         // console.log("PRODUCT",product)
         // console.log(reviews)
         console.log(destroyProduct)
+
         return (
             product ?
                 <div>
@@ -64,10 +72,14 @@ class SingleProduct extends Component {
                     <h4>{product.name} | {product.description} | {product.price}</h4>
                     <img className="imgResponsive" src={product.image} />
 
-
+                    { !productInCart?
                     <button className="btn btn-success btn-lg" onClick={this.handleClick}>
                         <span className="glyphicon glyphicon-shopping-cart"></span> Add To Cart
-              </button>
+
+                    </button> 
+                    : <h1>Already in Cart!</h1>
+                    </button>
+                    }
               {
                 isAdmin? <div>
                 <Link to ={`/products/edit/${product.id}`}><button className="btn btn-warning">EDIT PRODUCT</button></Link>

@@ -4,8 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, SingleProduct,
-         Categories, LandingPage, Cart, SingleCategory, SearchProducts, Checkout, AddProduct, EditProduct } from './components'
+import { Main, Login, Signup, UserHome, ProductList, SingleProduct, Categories, LandingPage, Cart, SingleCategory, SearchProducts, Checkout, AddProduct, EditProduct, ConfirmOrder } from './components'
 import {me} from './store'
 import store, {getCategoriesThunk, fetchProducts, fetchItemsFromCart} from './store';
 
@@ -31,7 +30,8 @@ class Routes extends Component {
 
           <Switch>
             {/* Routes placed here are available to all visitors */}
-             
+             <Route exact path='/confirm' component={ConfirmOrder} />
+             <Route exact path='/products' render={() => <ProductList products={products} />} />} />
              <Route exact path ='/products/add' component={AddProduct} />
              <Route exact path ='/products/edit/:productId' component={EditProduct} />
              <Route exact path='/checkout' component={Checkout} />
