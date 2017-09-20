@@ -12,7 +12,16 @@ export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
 export const DELETE_ITEM_FROM_CART = "DELETE_ITEM_FROM_CART";
 export const DELETE_ALL_ITEMS_FROM_CART = "DELETE_ALL_ITEMS_FROM_CART";
 export const GET_CART_TOTAL = "GET_CART_TOTAL";
+export const UPDATE_QUANTITY_PRICE = "UPDATE_QUANTITY_PRICE";
 
+export function updateQuantityPrice(cartItemId, quantityPrice, quantity){
+    return {
+        type: UPDATE_QUANTITY_PRICE,
+        quantityPrice,
+        cartItemId,
+        quantity
+    }
+}
 
 //action creators
 export function addItemToCart(newItemEntry) {
@@ -112,9 +121,24 @@ export default function (state = initialState, action) {
         
         case GET_CART_TOTAL:
             const totalPrice = state.itemsInCart.reduce((sum, currentItem)=>{
-                return sum + Number(currentItem.price)
+                return sum + Number(currentItem.quantityPrice)
             }, 0) 
             return Object.assign({}, state, { total: totalPrice })
+        case UPDATE_QUANTITY_PRICE:
+            const updatedItemsInCart = state.itemsInCart.map(cartItem => {
+                if(+cartItem.id === +action.cartItemId) {
+                    return {...cartItem,
+                            quantityPrice: action.quantityPrice,
+                            quantity: +action.quantity }
+                    // return Object.assign({}, cartItem, { 
+                    //     quantityPrice: action.quantityPrice,
+                    //     quantity: action.quantity
+                    // })
+                } else {
+                    return cartItem
+                }
+            })
+            return Object.assign({}, state, { itemsInCart: updatedItemsInCart })    
 
         default:
             return state

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeItemFromCart, removeAllItemsFromCart, getCartTotal } from '../store'
+import { removeItemFromCart, removeAllItemsFromCart, updateQuantityPrice, getCartTotal } from '../store'
 
 export class CartItem extends Component {
     constructor(props){
@@ -21,12 +21,8 @@ export class CartItem extends Component {
 
     handleChange(evt){
         let evtVal = evt.target.value;
-        // if(+this.state.price * +evt.target.value !== 0) {
-        //     priceUpdated = +this.state.price * +evt.target.value
-        // }
         this.setState({ 
             quantity: evt.target.value,
-            //price: priceUpdated || this.state.price
         })
         if(evt.target.value === '') {
             evtVal = 0
@@ -34,6 +30,8 @@ export class CartItem extends Component {
         this.setState({
             quantityPrice: +this.state.itemPrice * +evtVal
         })
+        this.props.updatePrice(this.props.item.id, +this.state.itemPrice * +evtVal, evt.target.value)
+        this.props.getTotalPrice()
     }
 
     render() {
@@ -74,6 +72,12 @@ const mapDispatchToProps = (dispatch) => {
         removeAllItemsFromCart: () => {
             dispatch(removeAllItemsFromCart())
         },
+        updatePrice: (cartItemId, updatedPrice, newQuantity) => {
+            dispatch(updateQuantityPrice(cartItemId, updatedPrice, newQuantity))
+        },
+        getTotalPrice: () => {
+            dispatch(getCartTotal())
+        }
     }
 }
 

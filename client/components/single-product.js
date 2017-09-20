@@ -41,7 +41,8 @@ class SingleProduct extends Component {
             price: product.price,
             description: product.description,
             image: product.image,
-            quantity: 1
+            quantity: 1,
+            quantityPrice: product.price,
         }
         console.log(productToAdd)
         this.props.placeItemInCart(productToAdd)
