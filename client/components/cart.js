@@ -7,21 +7,12 @@ import CartItem from './cart-item';
 class Cart extends Component {
     constructor(props){
         super(props)
-        // this.state = {
-        //     total: this.props.total,
-        //     cartItems: []
-        // }
         this.removeAll = this.removeAll.bind(this)
     }
 
     removeAll(){
         this.props.removeAllItemsFromCart()
     }
-
-    // changeTotal(newTotal) {
-    //     this.setState({ total: newTotal })
-    // }
-    // changeTotal={this.changeTotal}
 
     render() {
         console.log("CART PROPS", this.props)

@@ -25,7 +25,6 @@ class ConfirmOrder extends Component{
         })
         const newOrder = { cartItems }
         this.props.postOrder(newOrder)
-        //this.props.emptyCart()
     }
 
     render(){
@@ -65,9 +64,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         postOrder: (order) => {
             dispatch(placeOrder(order))
         },
-        emptyCart: () => {
-            dispatch(removeAllItemsFromCart())
-        }
     }
 }
 

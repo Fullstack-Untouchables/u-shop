@@ -3,9 +3,6 @@ import {removeAllItemsFromCart} from './index.js';
 
 const initialState = {
     orders: [],
-    // total: 0,
-    // items: [],
-    // user: '',
 }
 
 const PLACE_ORDER = 'PLACE_ORDER';

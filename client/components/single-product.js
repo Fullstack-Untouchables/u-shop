@@ -34,7 +34,6 @@ class SingleProduct extends Component {
 
     handleClick(evt) {
         const product = this.state.product
-        console.log("clicked")
         const productToAdd = {
             id: product.id,
             name: product.name,
@@ -53,15 +52,10 @@ class SingleProduct extends Component {
         console.log("SINGLE PRODUCT PROPS", this.props.itemsInCart)
         const product = this.state.product
         const reviews = product.reviews
-        // console.log("add item to cart",addItemToCart)
-        // console.log("PRODUCT",product)
-        // console.log(reviews)
         let productInCart;
         this.props.itemsInCart.forEach((p)=>{ if(+p.id === +product.id){
             productInCart = true;
         }  })
-        //console.log("PRODUCT IN CART ", productInCart)
-        console.log("STATEEEE",this.state)
         return (
             product ?
                 <div>
