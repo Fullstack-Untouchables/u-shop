@@ -30,6 +30,7 @@ class Routes extends Component {
 
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route exact path='/' component={Login} />
              <Route exact path='/confirm' component={ConfirmOrder} />
              <Route exact path='/products' render={() => <ProductList products={products} isAdmin={isAdmin}/>} />} />
              <Route exact path ='/products/add' component={AddProduct} />
